@@ -91,6 +91,8 @@ class FinancialDataSource:
             return None
 
         try:
+            import socket
+            socket.setdefaulttimeout(10)
             results = []
             for c in constituents[:config.MAX_FINANCIAL_COMPANIES]:
                 code = c.get("code", "")
@@ -103,17 +105,13 @@ class FinancialDataSource:
                     results.append(row)
 
             bs.logout()
-
-            if results:
-                self._save_to_cache(industry, results)
-                return results
-            return None
         except Exception:
-            try:
-                bs.logout()
-            except Exception:
-                pass  # constituents unavailable, will try cache
-            return None
+            pass
+
+        if results:
+            self._save_to_cache(industry, results)
+            return results
+        return None
 
     def _query_stock_financials(self, bs, code: str, name: str) -> Optional[Dict]:
         """查询单只股票的财务指标。baostock 返回的是小数（0~1），需要 ×100 转百分比。

@@ -248,24 +248,31 @@ def _baostock_constituents(industry: str, codes: List[str],
 
     适用于交易时段腾讯/新浪不通、但需要近期 PE 数据的场景。
     skeleton 仅提供公司名称（code → name 映射），不提供行情数据兜底。
+
+    每只股票独立查询，单只失败不影响其他。
+    日期范围缩小到 30 天以减少海外网络断连概率。
     """
+    import socket
+
     try:
         import baostock as bs
         bs.login()
     except Exception:
         return None
 
-    try:
-        today = time.strftime("%Y-%m-%d")
-        results = []
-        code_to_name = {s["code"]: s.get("name", "") for s in skeleton}
+    results = []
+    code_to_name = {s["code"]: s.get("name", "") for s in skeleton}
+    today = time.strftime("%Y-%m-%d")
+    start_date = time.strftime("%Y-%m-%d", time.localtime(time.time() - 30 * 86400))
 
-        for code in codes:
+    for code in codes:
+        try:
+            socket.setdefaulttimeout(8)
             prefix = "sh" if code.startswith(("6", "5")) else "sz"
             rs = bs.query_history_k_data_plus(
                 f"{prefix}.{code}",
                 "date,close,peTTM",
-                start_date=time.strftime("%Y-%m-%d", time.localtime(time.time() - 90*86400)),
+                start_date=start_date,
                 end_date=today,
             )
             if rs.error_code != '0':
@@ -293,15 +300,15 @@ def _baostock_constituents(industry: str, codes: List[str],
                 "market_cap_billion": None,
                 "_source": "baostock（日线PE）",
             })
-
-        bs.logout()
-        return results if len(results) >= 3 else None
-    except Exception as e:
-        try:
-            bs.logout()
         except Exception:
-            pass
-        return None  # baostock unavailable
+            continue  # 单只股票查询失败，跳过
+
+    try:
+        bs.logout()
+    except Exception:
+        pass
+
+    return results if len(results) >= 3 else None
 
 
 # ── 新浪概念板块成分股 ──────────────────────────────────────
