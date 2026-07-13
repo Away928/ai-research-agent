@@ -195,6 +195,7 @@ if started and industry:
 
     progress_bar = st.progress(0, text="准备开始…")
     stage_times = {}
+    stage_reports = {}
 
     for i, (name, func, label, _desc) in enumerate(stages):
         progress_bar.progress((i) / len(stages), text=f"🔍 {label} — 执行中…")
