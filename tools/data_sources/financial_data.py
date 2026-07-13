@@ -100,7 +100,10 @@ class FinancialDataSource:
                 if not code:
                     continue
 
-                row = self._query_stock_financials(bs, code, name)
+                try:
+                    row = self._query_stock_financials(bs, code, name)
+                except Exception:
+                    continue  # 单只股票查询失败，跳过
                 if row:
                     results.append(row)
 
@@ -135,30 +138,39 @@ class FinancialDataSource:
             # 利润表 → ROE + 毛利率（遍历季度直到有数据）
             for year, quarter in quarters:
                 rs = bs.query_profit_data(code=full_code, year=year, quarter=quarter)
-                if rs.error_code == "0" and rs.next():
-                    r = rs.get_row_data()
-                    roe = _pct(r[3])           # 加权ROE
-                    gross_margin = _pct(r[5])  # 毛利率
+                if rs.error_code == "0":
+                    while rs.next():
+                        r = rs.get_row_data()
+                        roe = _pct(r[3])           # 加权ROE
+                        gross_margin = _pct(r[5])  # 毛利率
+                        if roe is not None or gross_margin is not None:
+                            data_period = data_period or f"{year}Q{quarter}"
+                            break
                     if roe is not None or gross_margin is not None:
-                        data_period = f"{year}Q{quarter}"
                         break
 
             # 增长数据 → 营收增速 + 净利润增速
             for year, quarter in quarters:
                 rs = bs.query_growth_data(code=full_code, year=year, quarter=quarter)
-                if rs.error_code == "0" and rs.next():
-                    r = rs.get_row_data()
-                    revenue_growth = _pct(r[3])       # 营收同比
-                    net_profit_growth = _pct(r[5])    # 净利润同比
+                if rs.error_code == "0":
+                    while rs.next():
+                        r = rs.get_row_data()
+                        revenue_growth = _pct(r[3])       # 营收同比
+                        net_profit_growth = _pct(r[5])    # 净利润同比
+                        if revenue_growth is not None or net_profit_growth is not None:
+                            break
                     if revenue_growth is not None or net_profit_growth is not None:
                         break
 
             # 杜邦分析 → 资产负债率
             for year, quarter in quarters:
                 rs = bs.query_dupont_data(code=full_code, year=year, quarter=quarter)
-                if rs.error_code == "0" and rs.next():
-                    r = rs.get_row_data()
-                    debt_ratio = _pct(r[10])  # 资产负债率
+                if rs.error_code == "0":
+                    while rs.next():
+                        r = rs.get_row_data()
+                        debt_ratio = _pct(r[10])  # 资产负债率
+                        if debt_ratio is not None:
+                            break
                     if debt_ratio is not None:
                         break
 
