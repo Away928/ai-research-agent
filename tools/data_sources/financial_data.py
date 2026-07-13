@@ -94,6 +94,7 @@ class FinancialDataSource:
         socket.setdefaulttimeout(10)
         results = []
         for c in constituents[:config.MAX_FINANCIAL_COMPANIES]:
+            code = c.get("code", "")
             name = c.get("name", "")
             if not code:
                 continue
