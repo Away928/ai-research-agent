@@ -182,12 +182,8 @@ if started and industry:
         uploads=upload_list,
     )
 
-    # ── Pipeline 时间轴 ──
-    pipeline_ph = st.empty()
-    pipeline_ph.markdown(
-        _render_pipeline_html(current=-1), unsafe_allow_html=True)
-
-    data_display = st.empty()
+    # ── Pipeline 时间轴（一次性渲染，避免 DOM 冲突）──
+    st.markdown("### ⏳ 执行进度")
 
     # 执行工作流
     stages = [
@@ -197,31 +193,24 @@ if started and industry:
         ("investment_thesis", agent.stage_investment_thesis, "投资研判", "周期判断、催化剂、机会排序 → 最终报告"),
     ]
 
-    # 每阶段 AI 输出及独立报告下载
-    stage_reports = {}  # {stage_key: ai_output}
-
+    progress_bar = st.progress(0, text="准备开始…")
     stage_times = {}
 
     for i, (name, func, label, _desc) in enumerate(stages):
-        pipeline_ph.markdown(
-            _render_pipeline_html(current=i, stage_times=stage_times),
-            unsafe_allow_html=True)
+        progress_bar.progress((i) / len(stages), text=f"🔍 {label} — 执行中…")
         t0 = time.time()
         try:
             output = func()
         except Exception as e:
             output = f"错误: {e}"
-            pipeline_ph.markdown(
-                _render_pipeline_html(current=i, error_stage=i, stage_times=stage_times),
-                unsafe_allow_html=True)
+            progress_bar.progress((i) / len(stages), text=f"❌ {label} — 出错")
         elapsed = time.time() - t0
         stage_times[i] = elapsed
 
         # 阶段 1 完成后展示数据亮点
         if i == 0:
-            with data_display.container():
-                render_data_cards(agent.context)
-                render_market_charts(agent.context)
+            render_data_cards(agent.context)
+            render_market_charts(agent.context)
 
         # 阶段 2/3/4 完成后展示中间报告
         if i >= 1 and output and len(output) > 50:
@@ -241,9 +230,7 @@ if started and industry:
                 )
 
     # ── 完成 ──
-    pipeline_ph.markdown(
-        _render_pipeline_html(current=4, stage_times=stage_times),
-        unsafe_allow_html=True)
+    progress_bar.progress(100, text="✅ 研究完成")
     total_ai = sum(s["duration_seconds"] for s in agent.work_log)
 
     # 写入历史索引
