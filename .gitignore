@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.DS_Store
+
+# Output (keep only demo files, ignore generated)
+demo_output/*.json
+demo_output/work_log_*.json
+demo_output/*_行业扫描报告_*.md
+demo_output/*_扫描报告_202*.md
+demo_output/*_实际运行.md
+!demo_output/AI算力行业扫描报告_demo.md
+!demo_output/生成式AI行业扫描报告_demo.md
+!demo_output/AI_vs_传统研究方法效率对比报告.md
+!demo_output/AI编程工具横向评测报告.md
+!demo_output/README.md
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Env
+.env
+venv/
+.venv/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Cache (auto-generated, not for version control)
+tools/cache/*.json
+
+# Legacy (removed modules)
+claude_client.py
+tools/csmar_loader.py
