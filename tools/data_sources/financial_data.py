@@ -90,26 +90,23 @@ class FinancialDataSource:
         except Exception:
             return None
 
-        try:
-            import socket
-            socket.setdefaulttimeout(10)
-            results = []
-            for c in constituents[:config.MAX_FINANCIAL_COMPANIES]:
-                code = c.get("code", "")
-                name = c.get("name", "")
-                if not code:
-                    continue
+        import socket
+        socket.setdefaulttimeout(10)
+        results = []
+        for c in constituents[:config.MAX_FINANCIAL_COMPANIES]:
+            code = c.get("code", "")
+            name = c.get("name", "")
+            if not code:
+                continue
 
-                try:
-                    row = self._query_stock_financials(bs, code, name)
-                except Exception:
-                    continue  # 单只股票查询失败，跳过
-                if row:
-                    results.append(row)
+            try:
+                row = self._query_stock_financials(bs, code, name)
+            except Exception:
+                continue  # 单只股票查询失败，跳过
+            if row:
+                results.append(row)
 
-            bs.logout()
-        except Exception:
-            pass
+        bs.logout()
 
         if results:
             self._save_to_cache(industry, results)
