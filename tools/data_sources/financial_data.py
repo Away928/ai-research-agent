@@ -106,7 +106,10 @@ class FinancialDataSource:
             if row:
                 results.append(row)
 
-        bs.logout()
+        try:
+            bs.logout()
+        except Exception:
+            pass
 
         if results:
             self._save_to_cache(industry, results)
