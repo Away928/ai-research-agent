@@ -17,15 +17,23 @@ def render_sidebar(industries: dict) -> dict:
     with st.sidebar:
         st.markdown("### 🔑 API 配置")
 
-        # 后端选择
+        # 后端选择：自动检测默认值
         backend_options = ["openai_compat", "anthropic"]
         backend_labels = {
             "openai_compat": "OpenAI 兼容 (DeepSeek / 千问 / 豆包…)",
             "anthropic": "Anthropic (Claude)",
         }
+        # 自动检测默认后端：优先 OPENAI_API_KEY/OPENAI_BASE_URL，其次 ANTHROPIC_*
+        if os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_BASE_URL"):
+            default_backend_idx = 0  # openai_compat
+        elif os.environ.get("ANTHROPIC_AUTH_TOKEN") or os.environ.get("ANTHROPIC_BASE_URL") or os.environ.get("ANTHROPIC_API_KEY"):
+            default_backend_idx = 1  # anthropic
+        else:
+            default_backend_idx = 0
         model_backend = st.selectbox(
             "模型后端",
             options=backend_options,
+            index=default_backend_idx,
             format_func=lambda x: backend_labels[x],
             help="选择使用哪个模型后端",
             key="sidebar_backend",

@@ -77,7 +77,7 @@ st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 # ── 标题区 ────────────────────────────────────────────────
 
 st.markdown(
-    '<p class="hero-title">Research<span class="hero-dot">.</span>Agent</p>',
+    '<p class="hero-title">研究<span class="hero-dot">.</span>代理</p>',
     unsafe_allow_html=True)
 st.markdown(
     '<p class="hero-sub">行业投研自动化 — 采集、分析、报告，AI 处理 80% 的体力活</p>',
