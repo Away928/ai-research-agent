@@ -74,14 +74,6 @@ cd ai-research-agent
 pip install -r requirements.txt
 ```
 
-#### Web 界面
-
-```bash
-streamlit run app.py
-```
-
-在浏览器中打开 `http://localhost:8501`，侧边栏配置 API key，选择行业即可开始。
-
 ### 命令行
 
 ```bash
