@@ -74,7 +74,7 @@ cd ai-research-agent
 pip install -r requirements.txt
 ```
 
-### 命令行
+#### 命令行
 
 ```bash
 # 降级模式（无需 API key）— 数据采集 + 打印 Prompt 模板
