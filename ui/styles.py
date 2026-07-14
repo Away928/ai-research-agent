@@ -327,4 +327,26 @@ CUSTOM_CSS = """\
     align-items: center;
     gap: 0.5rem;
 }
+
+/* ── 文件上传区域中文覆盖 ──────────────────────────────── */
+[data-testid="stFileUploaderDropzone"] div[data-testid="stMarkdownContainer"] p {
+    visibility: hidden;
+}
+[data-testid="stFileUploaderDropzone"] div[data-testid="stMarkdownContainer"] p::after {
+    content: "拖拽文件到此处，或点击下方按钮浏览文件";
+    visibility: visible;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+[data-testid="stFileUploaderDropzone"] button {
+    visibility: hidden;
+}
+[data-testid="stFileUploaderDropzone"] button::after {
+    content: "浏览文件";
+    visibility: visible;
+    display: inline-block;
+}
 </style>"""
