@@ -1,6 +1,6 @@
 # 🧠 AI Research Agent
 
-**给定一个行业名称，AI 自动完成行业投资研究的 80% 体力活，你只做最重要的 20% 判断。**
+**输入行业名称，AI 自动完成数据采集、多维度分析和报告撰写，你只需做最终判断。**
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -151,7 +151,7 @@ ai-research-agent/
 **不是"替代人"，是"放大人"。**
 
 ```
-        AI 负责（80% 工作量）
+        AI 负责（数据采集 + 分析 + 报告）
   数据采集 → 结构化提取 → 多维度对比 → 报告生成
               │
               ▼

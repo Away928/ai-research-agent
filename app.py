@@ -80,7 +80,7 @@ st.markdown(
     '<p class="hero-title">Research<span class="hero-dot">.</span>Agent</p>',
     unsafe_allow_html=True)
 st.markdown(
-    '<p class="hero-sub">行业投研自动化 — 采集、分析、报告，AI 处理 80% 的体力活</p>',
+    '<p class="hero-sub">行业投研自动化 — 输入行业，AI 完成数据采集、分析、报告全链路</p>',
     unsafe_allow_html=True)
 
 st.divider()
