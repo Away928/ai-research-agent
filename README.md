@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9+-blue)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Version](https://img.shields.io/badge/version-3.4-blue)]()
-[![Streamlit Cloud](https://img.shields.io/badge/🚀-在线体验-red)](https://ai-research-agent.streamlit.app)
+[![Streamlit Cloud](https://img.shields.io/badge/🚀-在线体验-red)](https://ai-research-agent928.streamlit.app)
 
 ```
 📊 数据采集 → 🔍 行业全景 → 🏢 公司深度 → 📝 投资研判
@@ -62,7 +62,7 @@ Terminal Blue 专业深蓝风格，Pipeline 时间轴可视化（实时耗时）
 
 ### 🌐 在线使用（推荐）
 
-👉 **[ai-research-agent.streamlit.app](https://ai-research-agent.streamlit.app)**
+👉 **[ai-research-agent928.streamlit.app](https://ai-research-agent928.streamlit.app)**
 
 浏览器打开即用，无需安装任何东西。在侧边栏配置 API key，选择行业即可开始分析。
 
