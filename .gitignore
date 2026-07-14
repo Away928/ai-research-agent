@@ -6,16 +6,9 @@ __pycache__/
 .DS_Store
 
 # Output (keep only demo files, ignore generated)
-demo_output/*.json
-demo_output/work_log_*.json
-demo_output/*_行业扫描报告_*.md
-demo_output/*_扫描报告_202*.md
-demo_output/*_实际运行.md
-!demo_output/AI算力行业扫描报告_demo.md
-!demo_output/生成式AI行业扫描报告_demo.md
-!demo_output/AI_vs_传统研究方法效率对比报告.md
-!demo_output/AI编程工具横向评测报告.md
+demo_output/*
 !demo_output/README.md
+!demo_output/半导体_行业扫描报告_20260714_122550.md
 
 # IDE
 .vscode/
