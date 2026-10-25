@@ -19,9 +19,14 @@
       "bytes": 205
     },
     {
+      "path": "CONTRIBUTING.md",
+      "sha256": "3a556c995406e1d838be510aea52303942ea8d4a70760e6de7f07e0987353a1e",
+      "bytes": 1323
+    },
+    {
       "path": "DEMO_GUIDE.md",
-      "sha256": "fa191aa49e05c4325a9b34ebbccc1f8bbf854665407342064ffa5a4d7aa154b4",
-      "bytes": 3667
+      "sha256": "e3db2fd804ba725e1b40e141ee923a5a78d7ee07038d01d8c4d956c12e2d1f89",
+      "bytes": 2569
     },
     {
       "path": "LICENSE",
@@ -30,13 +35,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "ff2965026a1610bb6d02be1241e18ca13b7a218408e081be99a88847457e9be7",
-      "bytes": 19039
+      "sha256": "89d5bc0bd4682f820a6f85d799d60e61159ea031a24542b6a5047bd4c194dd84",
+      "bytes": 7743
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "4e1b94be731525ebef737ee2d227ea33dd3a93bb3f0224a2e8fefebcf3d9927c",
+      "bytes": 1162
     },
     {
       "path": "V0.1_ACCEPTANCE.md",
-      "sha256": "de8afc20fb206c39a6d576925d066fdc99f677cefc1f9a98b350a3721613897c",
-      "bytes": 3830
+      "sha256": "63da65ffae641c67ebfc62199150611eefde5a9264da6a238006e6eb0cca400b",
+      "bytes": 2588
     },
     {
       "path": "agent_helpers.py",
