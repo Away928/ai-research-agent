@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.DS_Store
+
+# Output (keep only demo files, ignore generated)
+demo_output/*
+!demo_output/README.md
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Env
+.env
+.env.*
+!.env.example
+venv/
+.venv/
+
+# Future local research materials must not enter new commits.
+# Important: ignored paths ALREADY tracked in Git/history remain tracked until
+# separately reviewed and explicitly untracked/remediated.
+user_data/*
+!user_data/README.md
+.claude/settings.local.json
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Cache (auto-generated, not for version control)
+tools/cache/*.json
+
+# Legacy (removed modules)
+claude_client.py
+tools/csmar_loader.py

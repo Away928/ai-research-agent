@@ -1,0 +1,112 @@
+{
+  "行业": "虚构测试能源",
+  "采集时间": "2026-01-15 09:00:00",
+  "数据源状态": {
+    "market_data": "✅ 合成数据",
+    "financial_data": "✅ 合成数据",
+    "announcement_data": "✅ 合成数据",
+    "news_data": "✅ 合成数据",
+    "user_supplements": "— 无用户补充数据"
+  },
+  "market_data": {
+    "行业": "虚构测试能源",
+    "source": "SYNTHETIC_TEST_MARKET (not live)",
+    "fetch_timestamp": "2026-01-15 09:00:00",
+    "行情": {
+      "pe_median": 12.5,
+      "market_cap_total": 255.0,
+      "index_name": "虚构能源指数",
+      "index_change_pct": 1.1,
+      "_source": "SYNTHETIC_TEST_MARKET"
+    },
+    "成分股": [
+      {
+        "code": "TST001",
+        "name": "合成甲公司",
+        "pe": 12.5,
+        "market_cap_billion": 150.0,
+        "_source": "SYNTHETIC_TEST_MARKET"
+      },
+      {
+        "code": "TST002",
+        "name": "合成乙公司",
+        "pe": 15.0,
+        "market_cap_billion": 105.0,
+        "_source": "SYNTHETIC_TEST_MARKET"
+      }
+    ]
+  },
+  "financial_data": {
+    "行业": "虚构测试能源",
+    "source": "SYNTHETIC_TEST_FINANCIAL (not live)",
+    "fetch_timestamp": "2026-01-15 09:00:00",
+    "公司财务": [
+      {
+        "code": "TST001",
+        "name": "合成甲公司",
+        "roe_pct": 8.0,
+        "gross_margin_pct": 35.0,
+        "revenue_growth_pct": 12.0,
+        "net_profit_growth_pct": 9.0,
+        "debt_ratio_pct": 40.0,
+        "_data_period": null,
+        "_metric_periods": {
+          "roe_pct": "2025Q3",
+          "gross_margin_pct": "2025Q3",
+          "revenue_growth_pct": "2025Q2",
+          "net_profit_growth_pct": "2025Q2",
+          "debt_ratio_pct": "2025Q3"
+        },
+        "_source": "SYNTHETIC_TEST_FINANCIAL"
+      },
+      {
+        "code": "TST002",
+        "name": "合成乙公司",
+        "roe_pct": 5.0,
+        "gross_margin_pct": 25.0,
+        "revenue_growth_pct": 7.0,
+        "net_profit_growth_pct": 4.0,
+        "debt_ratio_pct": 45.0,
+        "_data_period": "2025Q3",
+        "_metric_periods": {
+          "roe_pct": "2025Q3",
+          "gross_margin_pct": "2025Q3",
+          "revenue_growth_pct": "2025Q3",
+          "net_profit_growth_pct": "2025Q3",
+          "debt_ratio_pct": "2025Q3"
+        },
+        "_source": "SYNTHETIC_TEST_FINANCIAL"
+      }
+    ],
+    "指标说明": [
+      "roe_pct: ROE(%)",
+      "gross_margin_pct: 毛利率(%)"
+    ]
+  },
+  "announcement_data": {
+    "source": "SYNTHETIC_TEST_ANNOUNCEMENTS (not live)",
+    "fetch_timestamp": "2026-01-15 09:00:00",
+    "公告": [
+      {
+        "company": "合成甲公司",
+        "date": "2026-01-10",
+        "title": "纯合成测试公告",
+        "type": "测试",
+        "url": "https://example.invalid/synthetic"
+      }
+    ],
+    "研报": []
+  },
+  "news_data": {
+    "source": "SYNTHETIC_TEST_NEWS (not live)",
+    "fetch_timestamp": "2026-01-15 09:00:00",
+    "新闻": [
+      {
+        "title": "纯合成测试新闻",
+        "date": "2026-01-10",
+        "source": "SYNTHETIC_TEST_NEWS",
+        "summary": "这是一条人工编写的虚构数据。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+name: Python verification
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    name: Offline tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install minimal test dependencies
+        run: python -m pip install "pytest>=8,<9" "requests>=2.28,<2.33"
+      - name: Run synthetic and unit tests (no model or financial API)
+        run: python -m pytest -q
+
+  installation-smoke:
+    name: Full install and CLI smoke (Python 3.12)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install application requirements
+        run: python -m pip install -r requirements.txt
+      - name: Verify core imports
+        run: |
+          python -c "import pandas,requests,streamlit,baostock,akshare,altair,pdfplumber,PyPDF2,docx,tiktoken; import agent_workflow"
+      - name: Verify CLI entrypoint
+        run: python cli.py --help
+      - name: Run application tests
+        run: python -m pytest -q
+      - name: Verify offline demo and real research UI (mocked)
+        run: |
+          python scripts/verify_demo.py
+          python scripts/verify_real_entry.py
+      - name: Export self-contained demonstration HTML
+        run: python scripts/export_demo.py --output /tmp/research-agent-demo.html

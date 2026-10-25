@@ -1,0 +1,48 @@
+{
+  "kind": "official_disclosure_fixture",
+  "company": "贵州茅台酒股份有限公司",
+  "stock_code": "600519",
+  "period": "2025Q2",
+  "date": "2025-06-30",
+  "release_date": "2025-08-13",
+  "source": {
+    "publisher": "上海证券交易所",
+    "title": "贵州茅台酒股份有限公司2025年半年度报告",
+    "url": "https://big5.sse.com.cn/site/cht/www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-08-13/600519_20250813_TU6Y.pdf",
+    "page_numbers_1_based": [
+      5,
+      7,
+      25,
+      26,
+      28
+    ],
+    "verification_scope": "Numbers transcribed from official filing; NOT independently matched to baostock"
+  },
+  "numbers_cny": {
+    "operating_revenue_h1_2025": "89389354416.84",
+    "operating_revenue_h1_2024": "81930977667.75",
+    "cost_of_sales_h1_2025": "7777491083.93",
+    "attributable_net_profit_h1_2025": "45402962298.10",
+    "attributable_net_profit_h1_2024": "41695610983.37",
+    "total_assets_2025_06_30": "292257789095.51",
+    "total_liabilities_2025_06_30": "43122202832.76"
+  },
+  "reported_percent": {
+    "weighted_average_roe_h1": "17.89",
+    "operating_revenue_yoy_h1": "9.10",
+    "attributable_net_profit_yoy_h1": "8.89"
+  },
+  "derived_percent_expected": {
+    "operating_revenue_yoy_h1": "9.10",
+    "gross_margin_on_operating_revenue_h1": "91.30",
+    "attributable_net_profit_yoy_h1": "8.89",
+    "total_liabilities_to_assets_2025_06_30": "14.75"
+  },
+  "non_equivalence": {
+    "profit.MBRevenue": "Main-business revenue may exclude other-business revenue, so derived YoY cannot be assumed equal to the filing's operating-revenue YoY",
+    "growth.YOYNI": "Provider net-income YoY is not assumed equal to filing attributable-to-shareholders net-profit YoY without definition check",
+    "profit.roeAvg": "Supplier roeAvg methodology may differ from filing weighted-average ROE; numerical agreement not assumed",
+    "profit.gpMargin": "Supplier gpMargin must not be assumed equal to the consolidated operating revenue/cost gross margin without definition check"
+  },
+  "comparison_status": "official_formula_benchmark_only_provider_not_verified"
+}
