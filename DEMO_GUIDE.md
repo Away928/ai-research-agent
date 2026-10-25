@@ -32,7 +32,7 @@ python scripts/export_demo.py
 
 - **预设演示 ≠ 真实 Agent 执行。** 演示研究内容来自固定合成样本与预先写好的情景文本，不展示真实模型的质量或速度。
 - **快照对账 ≠ 财报核验。** FIN 引用只能检查它与当次合成输入的数字是否相符。
-- **公开分享 ≠ 开源发布。** 这份静态 HTML 只包含合成案例；项目 Git 历史曾包含需要人工评估授权的研究资料，当前仓库不可直接公开发布。
+- **开源发布 ≠ 已验证的真实投资研究。** 公开版已采用新的干净 Git 历史；旧 SHA 与克隆可能仍能找到历史内容，不能宣称全部删除。
 - **实时数据源不可用时不虚构数据。** 真实研究可能因 API、网络、报告期和供应商差异中断。
 
 ## 回归验收
@@ -45,4 +45,4 @@ python scripts/export_demo.py
 
 前两条命令检查离线研究逻辑与 Streamlit 页面入口；第三条生成可独立打开的 HTML。以上均不调用付费模型。若测试环境缺少依赖，请先按 `requirements.txt` 安装。
 
-**当前开发源码目录**：`~/Work-Space/Independent-Projects/Development/Agent/Research-Agent/`。启动和导出命令应从项目根目录执行；本地最新更改尚未推送到公开 GitHub 或现有 Streamlit 网站。
+**公开源码**：https://github.com/Away928/ai-research-agent 。**公开免登录演示**：https://away928.github.io/ai-research-agent/ 。原 Streamlit Cloud 站点仍须登录；如需执行模型与数据采集，请克隆公开源码，并从项目根目录启动。

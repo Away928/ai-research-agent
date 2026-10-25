@@ -2,7 +2,7 @@
 
 **从结构化数据到可审查的投资研究工作流。** 将数据采集、行业分析、公司比较和投资研判组织成四阶段过程；当前本地版本同时提供不调用模型的合成数据演示。
 
-**版本定位：v0.1 开源发布候选版；在线演示与真实数据均须单独验证** · Python 3.9+（推荐 3.12）· Streamlit 1.50+ · [MIT License](LICENSE)
+**版本定位：v0.1 开源预发布版；静态在线演示已开放，真实模型及金融数据仍需单独验证** · Python 3.9+（推荐 3.12）· Streamlit 1.50+ · [MIT License](LICENSE)
 
 无需安装软件的第一种体验方式：直接打开本机生成的 `demo_output/Research_Agent_离线产品演示.html`。它是独立的固定案例展示页，不是可在线运行的 Agent。
 
@@ -12,7 +12,7 @@
 
 ## 🧪 v0.1｜三分钟体验 Demo（无需 API Key）
 
-当前**本地开发版**新增一键离线演示：打开 Streamlit 默认进入「体验演示（无需配置）」。
+本次 **v0.1** 提供一键离线演示：打开 Streamlit 默认进入「体验演示（无需配置）」。
 
 ```bash
 python -m pip install -r requirements.txt
@@ -36,11 +36,11 @@ python scripts/export_demo.py
 
 切换到「🔬 真实研究（使用数据源）」才会进入原来的行业选择、文件上传及研究工作流。真实研究可能受网络、数据源与模型配置影响，其输出仍需独立核验。
 
-**重要：当前发布候选版不代表在线网站已经更新；历史旧仓库的内容需要单独安全处理。** 不要将现有在线体验链接当成新版 Demo 链接，也不要把合成数据当成真实市场信息。
+**公开演示已上线 GitHub Pages**：https://away928.github.io/ai-research-agent/ 。这是完全虚构数据的独立 HTML，不提供真实 AI 研究功能。原 Streamlit 网址目前需要登录，不能作为免登录公开演示；也不要把合成数据当成真实市场事实。
 
 **介绍用的三分钟讲解路线：** [DEMO_GUIDE.md](DEMO_GUIDE.md)。其中说明如何在不暴露用户资料、不调用付费模型的情况下演示四阶段工作流。
 
-**v0.1 交付验收：** [V0.1_ACCEPTANCE.md](V0.1_ACCEPTANCE.md)。依赖安装完成后运行 `python scripts/verify_v01.py`，即可一次检查离线单元测试、两种网页入口、CLI 和 HTML 导出。该验收不访问付费模型或真实金融 API，也不意味着仓库可以公开发布。
+**v0.1 交付验收：** [V0.1_ACCEPTANCE.md](V0.1_ACCEPTANCE.md)。依赖安装完成后运行 `python scripts/verify_v01.py`，即可一次检查离线单元测试、两种网页入口、CLI 和 HTML 导出。该验收不访问付费模型或真实金融 API，也不等于经过真实投资数据或模型的生产级验证。
 
 #### 演示验收（可复现）
 
@@ -54,7 +54,7 @@ python scripts/verify_demo.py
 
 
 
-## 🔬 真实研究模式（本地开发版）
+## 🔬 真实研究模式（本地安装版）
 
 在首页选择 **「真实研究（使用数据源）」** 后，先选行业，开始按钮才会启用。
 
@@ -123,11 +123,13 @@ Terminal Blue 专业深蓝风格，Pipeline 时间轴可视化（实时耗时）
 
 ## 🚀 快速开始
 
-### 🌐 现有在线版本（非最新本地 Demo）
+### 🌐 公开在线演示（无需登录）
 
-👉 **[ai-research-agent928.streamlit.app](https://ai-research-agent928.streamlit.app)**
+👉 **[Research Agent v0.1 静态展示页](https://away928.github.io/ai-research-agent/)**
 
-这是此前发布的在线版本；**当前本地 v0.1 一键 Demo 尚未部署上去**。要体验本次 Demo，请使用上文的本地启动方式。
+该页面已通过公开网页访问测试。内容全部为**固定合成数据**，可用于产品展示，不运行 Python、外部金融接口或模型。真实可交互的 Streamlit 应用请使用本地运行方式。
+
+此前的 [Streamlit Cloud 地址](https://ai-research-agent928.streamlit.app/) **目前要求登录**；是否向匿名访客开放，需在对应 Streamlit Cloud 管理界面调整应用可见性后单独验收。
 
 ### 💻 本地开发
 
@@ -322,7 +324,7 @@ python -m pytest tests/tools/data_sources/test_primary_filing.py -q
 python3 -m tools.release_safety
 ```
 
-原本被 Git 跟踪的 `user_data/` 研究资料、生成报告和本机配置虽已在本地 Git 索引中标记退出跟踪，但**过去的公开 Git 历史仍保留这些内容**，授权及隐私核验尚未完成。发布检查会将这些路径列为阻断或人工复核项。检查不会删除文件、清理 Git 历史，也不扫描文件内部所有秘密或替代许可证审计。必须在发布前单独完成源文件及历史风险处置，不能仅靠 `.gitignore`。
+当前公开 `main` 为重新建立的干净 Git 历史，不包含以前跟踪的 `user_data/` 研究资料、生成报告和本机配置。但**旧 SHA 可能仍被 GitHub 缓存或既有克隆访问**；这不是换根提交就能保证消失的。历史文件仍需要单独核对来源、授权及可见性。路径检查不会扫描所有秘密，不能替代内容级审查。
 
 ## ⚠️ 局限性
 
