@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; img-src data:">
+<meta name="description" content="AI Research Agent v0.1：完全虚构、离线、无模型调用的投资研究产品演示。">
+<title>Research Agent | 离线产品演示 · 纯合成数据</title>
+<style>
+:root{color-scheme:light;--ink:#101f36;--muted:#607189;--line:#dfe7f0;
+--blue:#2e59a5;--pale:#edf3ff;--bg:#f5f7fb;--white:#fff;--warn:#9e431e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,
+BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7}
+header,main,footer{max-width:1080px;margin:0 auto;padding:0 30px}
+.brandline{display:flex;align-items:center;justify-content:space-between;gap:16px;
+border-bottom:1px solid var(--line);padding-top:22px;padding-bottom:16px}
+.wordmark{font-size:18px;font-weight:750;letter-spacing:-.5px}.wordmark span{color:var(--blue)}
+.meta{color:var(--muted);font-size:12px}
+nav{display:flex;gap:20px;flex-wrap:wrap;margin:14px 0 0;font-size:13px}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.banner{padding:11px 16px;border:1px solid #efc8ac;border-radius:10px;
+background:#fff7f1;color:#873a17;font-size:13px;font-weight:600;margin-top:28px}
+.hero{padding:45px 0 33px}.eyebrow{text-transform:uppercase;font-size:11px;
+font-weight:700;letter-spacing:2.1px;color:var(--blue)}
+h1{font-size:clamp(30px,5vw,49px);line-height:1.22;letter-spacing:-1.4px;margin:14px 0}
+h2{font-size:24px;letter-spacing:-.5px;line-height:1.35;margin:0 0 14px}
+h3{font-size:17px;line-height:1.4;margin:0 0 10px}
+p{margin:0 0 12px}.lede{font-size:16px;color:#475c74;max-width:720px}
+.grid{display:grid;gap:15px}.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card,section.panel{background:var(--white);border:1px solid var(--line);
+border-radius:13px;padding:22px;box-shadow:0 5px 24px rgba(25,47,79,.035)}
+.kicker{color:var(--muted);font-size:12px;margin-bottom:5px}
+.number{font-size:29px;font-weight:750;letter-spacing:-1px;line-height:1.2}
+.sub{color:var(--muted);font-size:12px;margin-top:6px}
+section.panel{margin:25px 0;padding:30px}
+.stage-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.stage{padding:19px;border:1px solid var(--line);background:#fff;border-radius:12px}
+.stage .step{font-size:11px;font-weight:750;color:var(--blue);margin-bottom:8px}
+.stage h3{font-size:15px}.stage p{font-size:12px;color:var(--muted);margin:0}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+table{width:100%;border-collapse:collapse;min-width:680px;font-size:13px}
+th{text-align:left;background:#eef3fb;color:#445c7a;font-weight:650}
+td,th{padding:11px;border-bottom:1px solid var(--line);vertical-align:top}
+td:not(:first-child){font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+.note{color:var(--muted);font-size:12px;margin-top:14px}
+.callout{border-left:3px solid var(--blue);padding:13px 17px;
+background:var(--pale);border-radius:0 10px 10px 0}
+.risk{border-left-color:#c17850;background:#fff6ee}
+.pill{display:inline-block;border-radius:6px;background:var(--pale);
+color:var(--blue);padding:2px 8px;font-size:11px;font-weight:700}
+.check{color:#1a7257;font-weight:700}
+details{border-top:1px solid var(--line);margin-top:20px;padding-top:13px}
+summary{cursor:pointer;font-weight:650;color:var(--blue)}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.7 ui-monospace,
+SFMono-Regular,Consolas,monospace;background:#f8fafd;border-radius:8px;padding:18px;
+max-height:470px;overflow:auto}
+footer{padding-bottom:45px;font-size:12px;color:var(--muted)}
+@media(max-width:780px){header,main,footer{padding-left:17px;padding-right:17px}
+.metrics,.stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.split{grid-template-columns:1fr}.card,section.panel{padding:20px}}
+@media(max-width:420px){.metrics,.stage-grid{grid-template-columns:1fr}
+.brandline{flex-direction:column;align-items:flex-start}.hero{padding-top:26px}}
+@media print{body{background:#fff}nav,details{display:none}section.panel{break-inside:avoid}
+.card,.stage,section.panel{box-shadow:none}header,main,footer{max-width:none}
+.banner{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header>
+<div class="brandline"><div class="wordmark">Research<span>.</span>Agent <span class="pill">v0.1 Demo</span></div>
+<div class="meta">独立 HTML 演示 · 无外部资产 · 不含真实用户资料</div></div>
+<nav aria-label="页面导航"><a href="#overview">概览</a><a href="#pipeline">研究流程</a>
+<a href="#comparison">公司对比</a><a href="#thesis">投资判断演示</a><a href="#sources">证据与限制</a></nav>
+</header>
+<main>
+<div class="banner" role="note">🧪 全部为合成演示数据、虚构公司及预设研究文案。不是实时金融信息，没有调用大模型，不构成投资建议。</div>
+<section class="hero" id="overview">
+<div class="eyebrow">AI × INVESTMENT RESEARCH · PRODUCT DEMONSTRATION</div>
+<h1>从结构化数据<br>到可核查的投资研究交付</h1>
+<p class="lede">Research Agent 将数据采集、行业分析、公司比较和投资研判组织成四阶段流程。
+此页面展示其报告形态及分析逻辑；所有结果均由固定虚构样本预设生成。</p>
+<div class="meta">演示样本：虚构测试能源 · 合成数据快照：2026-01-15 09:00:00</div>
+</section>
+<div class="grid metrics" aria-label="合成研究关键指标">
+<article class="card"><div class="kicker">虚构公司</div><div class="number">2</div><div class="sub">仅用于验证对比流程</div></article>
+<article class="card"><div class="kicker">合成市值合计</div><div class="number">255 亿</div><div class="sub">人民币示意单位</div></article>
+<article class="card"><div class="kicker">同季度平均 ROE</div><div class="number">6.5%</div><div class="sub">仅两家虚构公司</div></article>
+<article class="card"><div class="kicker">营收同比可比性</div><div class="number">跨季度</div><div class="sub">不混合口径计算均值</div></article>
+</div>
+<section class="panel" id="pipeline">
+<div class="eyebrow">WORKFLOW</div><h2>四阶段研究流程</h2>
+<div class="grid stage-grid"><article class="stage"><div class="step">STEP 01</div><h3>数据采集</h3><p>固定 JSON 合成快照，无金融 API</p></article>
+<article class="stage"><div class="step">STEP 02</div><h3>行业全景</h3><p>市场结构、产业链情景与待核实问题</p></article>
+<article class="stage"><div class="step">STEP 03</div><h3>公司深度</h3><p>指标对比、报告期和数据限制</p></article>
+<article class="stage"><div class="step">STEP 04</div><h3>投资研判</h3><p>假设、反方论证与下一步核实</p></article></div>
+<p class="note">演示中的四阶段内容来自固定文案，而非实际运行金融数据抓取或 LLM 分析。</p>
+</section>
+<section class="panel" id="comparison">
+<div class="eyebrow">FINANCIAL COMPARISON</div><h2>公司财务对比</h2>
+<p>合成公司：合成甲公司、合成乙公司。指标均取自随项目提供的合成样本。</p>
+<div class="tablewrap"><table><thead><tr><th>公司（虚构）</th><th>模拟市值（亿元）</th><th>ROE</th><th>毛利率</th><th>主营业务收入同比</th><th>收入指标期间</th><th>资产负债率</th></tr></thead><tbody><tr><td>合成甲公司</td><td>150</td><td>8.0%</td><td>35.0%</td><td>12.0%</td><td>2025Q2</td><td>40.0%</td></tr>
+<tr><td>合成乙公司</td><td>105</td><td>5.0%</td><td>25.0%</td><td>7.0%</td><td>2025Q3</td><td>45.0%</td></tr></tbody></table></div>
+<p class="note"><strong>可比性警告：</strong>两家公司主营业务收入同比的报告期不一致，未计算跨季度平均增速。
+模拟市值、PE 与财务数据均未经真实市场核验。</p>
+<div class="callout"><strong>示例研究结论</strong><p>
+合成甲公司 的模拟 ROE 高于 合成乙公司，但两家公司数据不足以
+识别竞争优势、盈利驱动或行业投资价值。</p></div>
+</section>
+<section class="panel" id="thesis">
+<div class="eyebrow">INVESTMENT THESIS / RED TEAM</div><h2>研究判断：先提出假设，再尝试证伪</h2>
+<div class="split">
+<div class="callout"><h3>研究假设 · 待验证</h3>
+<p>假设虚构行业需求回暖，企业营收增长得以延续。合成数据只能演示分析路径，
+不能据此认定趋势或提供买卖建议。</p></div>
+<div class="callout risk"><h3>反方论证 · Red Team</h3>
+<p>基数效应、需求不及预期与成本上行均可能使假设失效。
+需要原始财报、现金流、订单和同行可比样本支持。</p></div>
+</div>
+<details><summary>展开预设研究正文（假设、依据与验证问题）</summary><pre>## 第四阶段｜投资研判与反方论证（合成情景）
+
+### 研究假设
+假设需求恢复将带动模拟公司收入增长。如果未来出现**真实且可比**的订单、
+收入与现金流数据，才可以进一步判断这一假设是否成立。
+
+### 支持假设的演示证据
+- 合成甲公司的主营业务收入同比为
+  **12.0%** `[[FIN-TST001-revenue_growth_pct=12.0]]`。
+- 合成甲公司的模拟毛利率高于合成乙公司，
+  但现有信息不足以归因于定价权或成本优势。
+
+### Red Team：反方观点
+如果需求没有改善、成本上行或高增长只是基数效应，则此前的增长假设可能失效。
+两家样本也不具备代表真实行业的统计条件。**不得据此给出买入/卖出建议。**
+
+### 下一步应核实
+1. 可核查的官方定期报告与同口径财务指标。
+2. 企业经营情况、行业需求与供应链数据。
+3. 不同季度的会计口径以及估值所采用的价格日期。
+</pre></details>
+</section>
+<section class="panel" id="sources">
+<div class="eyebrow">TRACEABILITY & LIMITATIONS</div><h2>证据链：明确知道什么，还不知道什么</h2>
+<p><span class="check">✓</span> 逐项记录来源标签和所属季度；报告中 FIN 标记与合成快照数值对账。</p>
+<p><span class="check">✓</span> 演示数据不包含真实用户资料；页面完全静态，无 JS、CDN、外部字体或 API 请求。</p>
+<p><strong>不能证明：</strong>提供方真实性、模型推理能力、真实财报准确性或投资决策质量。</p>
+<details><summary>查看完整 Markdown 演示报告（含财务对照表和附录）</summary>
+<pre># 🧪 虚构测试能源｜Research Agent 离线产品演示报告
+
+&gt; **纯合成示例 / 非真实投资研究 / 非 AI 模型生成**
+&gt; 本报告使用项目内固定虚构数据和预先编写的研究情景。
+&gt; 未连接行情或财务接口，未调用大模型，所有数字均不得视为市场事实。
+
+**演示生成日期：** 2026-10-25
+**合成数据快照日期：** 2026-01-15 09:00:00
+**体验方式：** 无 API Key、无网络、无付费模型
+**展示的工作流阶段：** 4 个（预设演示，不代表真实执行）
+
+
+### 数据源状态
+
+| 数据维度 | 状态 |
+|---------|------|
+| 行情 | ✅ |
+| 财务 | ✅ |
+| 公告 | ✅ |
+| 新闻 | ✅ |
+
+
+---
+
+
+# 执行摘要
+
+这是一份**完全虚构的行业投资研究演示**。样本包含两家合成公司，合计模拟市值 255 亿元；首家公司占比 58.8%。报告展示数据整理、行业概况、公司对比与带有反方观点的研究判断，不反映真实市场，不构成投资建议。
+
+## 第二阶段｜行业全景分析
+
+### 市场结构（合成样本）
+虚构测试能源仅用于展示 Research Agent 的四阶段工作流，不代表任何真实行业。
+样本覆盖 **2 家虚构公司**，合计模拟市值 **255 亿元**，
+模拟 PE 中位数为 **12.5 倍**。由于仅有两家样本，
+不能据此推断真实行业集中度或产业链格局。
+
+### 产业链及增长假设
+假设产业链由上游设备、中游系统集成与下游能源用户构成。
+这是展示分析逻辑的**情境假设**，没有真实市场规模、政策支持或公司调研证据。
+
+### 研究问题
+未来需要核实订单需求、盈利质量和产能利用率；缺少证据时不作确定性预测。
+
+
+## 第三阶段｜公司深度比较
+
+| 公司（均为虚构） | ROE | 毛利率 | 主营业务收入同比 | 净利润同比 | 负债率 | 模拟 PE |
+|---|---:|---:|---:|---:|---:|---:|
+| 合成甲公司 | 8.0% | 35.0% | 12.0% | 9.0% | 40.0% | 12.5 |
+| 合成乙公司 | 5.0% | 25.0% | 7.0% | 4.0% | 45.0% | 15.0 |
+
+### 数据阅读
+- 两家公司 ROE 报告期均为 2025Q3，合成样本平均 ROE 为 **6.5%**。
+- 主营业务收入同比分别来自 **2025Q2** 和 **2025Q3**，不是同一横截面；**不计算跨季度平均增长率**。
+- 合成甲公司的 ROE 为 **8.0%** `[[FIN-TST001-roe_pct=8.0]]`，
+  高于另一家，但不能据此认定竞争优势。
+- 合成乙公司的资产负债率为 **45.0%**，
+  仅表示合成输入中的资本结构，未经过任何财报核验。
+
+### 数据局限
+部分指标分属不同季度，任何横向比较都必须考虑报告期差异。
+不凭这两家公司推断行业实际平均水平。
+
+
+## 第四阶段｜投资研判与反方论证（合成情景）
+
+### 研究假设
+假设需求恢复将带动模拟公司收入增长。如果未来出现**真实且可比**的订单、
+收入与现金流数据，才可以进一步判断这一假设是否成立。
+
+### 支持假设的演示证据
+- 合成甲公司的主营业务收入同比为
+  **12.0%** `[[FIN-TST001-revenue_growth_pct=12.0]]`。
+- 合成甲公司的模拟毛利率高于合成乙公司，
+  但现有信息不足以归因于定价权或成本优势。
+
+### Red Team：反方观点
+如果需求没有改善、成本上行或高增长只是基数效应，则此前的增长假设可能失效。
+两家样本也不具备代表真实行业的统计条件。**不得据此给出买入/卖出建议。**
+
+### 下一步应核实
+1. 可核查的官方定期报告与同口径财务指标。
+2. 企业经营情况、行业需求与供应链数据。
+3. 不同季度的会计口径以及估值所采用的价格日期。
+
+
+## 结论
+
+该虚构案例演示了从结构化输入到可下载研究报告的完整路径。
+所有证券名称、财务指标、行业信息与研究假设均为**合成演示材料**。
+没有调用真实金融数据接口，没有调用 LLM，也没有验证真实投资结论。
+
+---
+
+## 📎 附录
+
+### A. 研究流程说明
+
+以下为四阶段**预设展示路径**，没有运行实时采集、AI 推理或投资研究。
+
+| # | 阶段 | 耗时 | 说明 |
+|---|------|------|------|
+| 1 | data_collection | 0.0s (0.0%) | 离线预设演示；非真实执行 |
+| 2 | industry_overview | 0.0s (0.0%) | 离线预设演示；非真实执行 |
+| 3 | company_deep_dive | 0.0s (0.0%) | 离线预设演示；非真实执行 |
+| 4 | investment_thesis | 0.0s (0.0%) | 离线预设演示；非真实执行 |
+
+
+### B. AI使用声明
+
+- 本次展示来自完全虚构的固定测试包，正文为预设文本；没有调用任何模型。
+- 数据和公司均为合成演示材料，不构成真实证券事实或投资建议。
+- FIN 引用只对照合成快照内的数字，不代表外部事实核验。
+
+### C. 本次采集来源（非事实核验）
+
+来源标签仅为采集程序的元信息，不保证数据提供方、观测日期或真实性。获取时间不等于金融数据所属日期；缺少具体日期时应保持未知。
+
+| 数据类型 | 实际来源标签 | 获取时间 | 事实核验 |
+|---|---|---|---|
+| 行情 | SYNTHETIC_TEST_MARKET (not live) | 2026-01-15 09:00:00 | 未核验 |
+| 财务 | SYNTHETIC_TEST_FINANCIAL (not live) | 2026-01-15 09:00:00 | 未核验 |
+| 公告 | SYNTHETIC_TEST_ANNOUNCEMENTS (not live) | 2026-01-15 09:00:00 | 未核验 |
+| 新闻 | SYNTHETIC_TEST_NEWS (not live) | 2026-01-15 09:00:00 | 未核验 |
+
+### D. 采集财务数字对照（非事实核验）
+
+以下 ID 仅指向本次采集的数据记录，不能证明供应商数字正确，也不代表 AI 正文已逐项完成证据比对。报告期未知时不得以采集时间代替。
+
+| 记录 ID | 股票代码 | 公司 | 指标 | 数值（%） | 报告期 | 采集来源标签 | 披露日期 | API字段或推导口径 |
+|---|---|---|---|---:|---|---|---|---|
+| `FIN-TST001-roe_pct` | TST001 | 合成甲公司 | ROE(%) | 8.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST001-gross_margin_pct` | TST001 | 合成甲公司 | 毛利率(%) | 35.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST001-revenue_growth_pct` | TST001 | 合成甲公司 | 营收增速(%) | 12.0 | 2025Q2 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST001-net_profit_growth_pct` | TST001 | 合成甲公司 | 净利增速(%) | 9.0 | 2025Q2 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST001-debt_ratio_pct` | TST001 | 合成甲公司 | 负债率(%) | 40.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST002-roe_pct` | TST002 | 合成乙公司 | ROE(%) | 5.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST002-gross_margin_pct` | TST002 | 合成乙公司 | 毛利率(%) | 25.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST002-revenue_growth_pct` | TST002 | 合成乙公司 | 营收增速(%) | 7.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST002-net_profit_growth_pct` | TST002 | 合成乙公司 | 净利增速(%) | 4.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+| `FIN-TST002-debt_ratio_pct` | TST002 | 合成乙公司 | 负债率(%) | 45.0 | 2025Q3 | SYNTHETIC_TEST_FINANCIAL | 未知 | 未知 |
+
+### E. 财务数字引用记录对账（非事实核验)
+
+本检查仅对正文中形如 `[[FIN-000001-roe_pct=8.0]]` 的显式标记，核对本次采集数据中股票代码、指标及标记数值是否一致。不检查未标记数字、标记附近的文字陈述、数据提供方的真实性或投资结论。
+
+可机读标记共 2 条；采集数值匹配 2 条，需复核 0 条。
+
+本次全部标记数值与采集快照一致，但不代表正文获得事实认证。
+
+### F. 作者
+
+**Research Agent Demo** — 纯合成示例，未包含用户资料或个人联系方式。
+
+---
+*生成时间：2026-10-25 14:25:07*
+</pre></details>
+</section>
+</main>
+<footer>Research Agent · v0.1 本地展示版 · 固定合成样本 · 本页面可在无网络环境下独立打开。
+任何分析均不构成投资建议。</footer>
+</body></html>
