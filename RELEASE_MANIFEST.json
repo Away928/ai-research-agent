@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "e17d76cfb847c0b95cbd25e7cfcc5ad6088ab7786cb165807f3dd265809441b4",
-      "bytes": 10449
+      "sha256": "61a9a2d43e1f0565846808360d55f413a1885d84ec10d77dc9d1b1786741e972",
+      "bytes": 9824
     },
     {
       "path": "SECURITY.md",
@@ -67,6 +67,11 @@
       "path": "app.py",
       "sha256": "c66a8c69f0adfa9f2a400aa75284d4161de799a95da80038d2386eba03b8efec",
       "bytes": 14921
+    },
+    {
+      "path": "case-studies/ai-compute-2026-10.md",
+      "sha256": "9ea805effea3377bb66b54e08246a3a3894d5f393ebb127237e1f00e130a4c5b",
+      "bytes": 1211
     },
     {
       "path": "case-studies/semiconductor-2026-07.md",

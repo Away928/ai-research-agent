@@ -6,7 +6,7 @@
 
 > **Demo-ready MVP, not an autonomous investment adviser.** The public demo uses **synthetic companies, synthetic data, and prewritten analysis**. It neither runs a live model nor retrieves real market data. The Streamlit interface is **synthetic-only by default**; private live research requires a server-side opt-in and independent access credential.
 
-**Interactive Streamlit app:** [ai-research-agent928.streamlit.app](https://ai-research-agent928.streamlit.app/) — once the hosting owner sets its Cloud **Sharing** setting to public, visitors can run the synthetic demo without signing in. The code itself is already safe-by-default; the hosted app's sharing status must be checked separately. See [Streamlit deployment and private-mode security](STREAMLIT_DEPLOYMENT.md).
+**Interactive Streamlit app:** The UI is implemented and runs locally. Anonymous public access to the [hosted URL](https://ai-research-agent928.streamlit.app/) is **not verified**; use the static demo or local instructions instead. See [Streamlit deployment and private-mode security](STREAMLIT_DEPLOYMENT.md).
 
 ## See it first — no setup
 
@@ -16,11 +16,9 @@ Explore an example four-stage research narrative, two fictional companies, compa
 
 To explore the **interactive** offline demo on your computer, run Streamlit as described below. The Streamlit Cloud sharing state must be verified independently in an unauthenticated session; the static demo remains an always-public fallback.
 
-## Historical real-data case study
+## Real research run
 
-The agent was used for a **historical A-share semiconductor research run in July 2026**, with local execution records, public-data source labels and an AI-assisted report. The retained report also reveals concrete data-quality limitations, and its appendix records **three executed stages rather than a verified complete four-stage run**.
-
-**[Read the real-run case study →](case-studies/semiconductor-2026-07.md)** · The interactive public demo is a **separate, synthetic** walkthrough.
+**[Real-run case study: AI Compute, October 2026](case-studies/ai-compute-2026-10.md)** — four-stage local execution. Figures and investment conclusions are not independently audited.
 
 ## What the project does
 
@@ -134,7 +132,7 @@ Contributions and reproducible bug reports are welcome: [Contributing](CONTRIBUT
 
 AI Research Agent 是一个面向投资研究的开源 AI Agent，整合金融数据采集、行业分析、公司比较与投资研判，形成完整的研究工作流，并生成可供审阅的研究报告。
 
-**真实运行案例**：项目曾在 2026 年 7 月运行 A 股半导体研究并生成报告；历史报告记录了数据采集及两个分析阶段，也暴露了需要核验的数据问题。[查看案例分析](case-studies/semiconductor-2026-07.md)。公开 Demo 则使用合成数据。
+**真实运行案例**：[AI 算力研究（2026 年 10 月）](case-studies/ai-compute-2026-10.md)
 
 ### 研究工作流
 
@@ -147,7 +145,7 @@ AI Research Agent 是一个面向投资研究的开源 AI Agent，整合金融�
 
 ### 如何体验
 
-- **在线交互演示**：[Streamlit Demo](https://ai-research-agent928.streamlit.app/) — 在浏览器中按研究流程逐步体验，无需安装。演示使用合成数据和预设分析内容。
+- **在线交互演示**：Streamlit 交互界面已经开发，但[云端地址](https://ai-research-agent928.streamlit.app/)的匿名访问尚未验证可用；目前请使用下方本地运行方式。
 - **静态演示**：[GitHub Pages](https://away928.github.io/ai-research-agent/) — 无需登录，直接浏览示例研究报告。
 - **本地运行**：克隆仓库、安装依赖并运行 `streamlit run app.py`。具体步骤见上方英文使用指南。
 
