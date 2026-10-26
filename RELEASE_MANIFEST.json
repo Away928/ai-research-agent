@@ -1,5 +1,5 @@
 {
-  "release": "v0.1.3",
+  "release": "v0.1.4",
   "origin_history_included": false,
   "all_files_allowlisted": true,
   "files": [
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "0e4cde8965dd1f3596ff867c6b2c296d3fa02b19fd268216f25068510990002c",
-      "bytes": 9284
+      "sha256": "32768086ce7844c125f5bfc0ec66fb03c0a7ee71821ee14f4600e29dd0e33359",
+      "bytes": 9389
     },
     {
       "path": "SECURITY.md",
@@ -50,7 +50,7 @@
     },
     {
       "path": "V0.1_ACCEPTANCE.md",
-      "sha256": "91cd7f5c4ea5a706f03507d2fa33265b5bfc60f9cc8bd0de7a8009c7b8ed4c58",
+      "sha256": "dec2ac79327199688314c5934a98ba199972c1546c01e16a4088768916f837bd",
       "bytes": 2831
     },
     {

@@ -2,7 +2,7 @@
 
 **An early-stage, evidence-aware workflow for investment research — from data collection to a reviewable report.**
 
-[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.3 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.3) · [MIT License](LICENSE) · [中文简介](#中文简介)
+[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.4 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.4) · [MIT License](LICENSE) · [中文简介](#中文简介)
 
 > **Demo-ready MVP, not an autonomous investment adviser.** The public demo uses **synthetic companies, synthetic data, and prewritten analysis**. It neither runs a live model nor retrieves real market data. The Streamlit interface is **synthetic-only by default**; private live research requires a server-side opt-in and independent access credential.
 
@@ -14,7 +14,7 @@
 
 Explore an example four-stage research narrative, two fictional companies, comparative financial tables, risks, and a downloadable report. The site is a standalone HTML presentation, open without an API key or account.
 
-To explore the **interactive** offline demo on your computer, run Streamlit as described below. The previous Streamlit Cloud address is not the recommended public demo because it currently requires authentication.
+To explore the **interactive** offline demo on your computer, run Streamlit as described below. The Streamlit Cloud sharing state must be verified independently in an unauthenticated session; the static demo remains an always-public fallback.
 
 ## What the project does
 
@@ -50,7 +50,7 @@ python3 -m venv .venv
 .venv/bin/python -m streamlit run app.py
 ```
 
-The public app opens **directly into the synthetic walkthrough** (no needless one-option mode selector). Click **“▶ 开始工作流演示”**, then use **“下一阶段 →”** to review four research stages followed by a separate report-delivery step. Detailed evidence and the full report stay collapsed until the relevant step. This demo requires **no financial or LLM API key**.
+The current public-mode code opens **directly into the synthetic walkthrough** (no needless one-option mode selector). Click **“▶ 开始工作流演示”**, then use **“下一阶段 →”** to review four research stages followed by a separate report-delivery step. Detailed evidence and the full report stay collapsed until the relevant step. This demo requires **no financial or LLM API key**.
 
 For a standalone HTML file you can share or open offline:
 
@@ -87,7 +87,7 @@ For the complete offline regression and UI acceptance suite:
 .venv/bin/python scripts/verify_v01.py
 ```
 
-This includes Python tests, simulated Streamlit interactions, CLI smoke checks and HTML export verification. The original v0.1 release passed **190 offline tests**. The deployment safety update adds server-access regression tests. [GitHub Actions](https://github.com/Away928/ai-research-agent/actions) verifies supported Python versions and full-install smoke tests.
+This includes Python tests, simulated Streamlit interactions, CLI smoke checks and HTML export verification. The current v0.1.3 code passed **197 offline tests**, including server-access regression tests and staged Streamlit UI checks. [GitHub Actions](https://github.com/Away928/ai-research-agent/actions) verifies supported Python versions and full-install smoke tests.
 
 There is a deliberately narrow distinction between **data consistency** and **factual correctness**:
 
@@ -130,7 +130,7 @@ AI Research Agent 是一个将**公开数据采集、行业梳理、公司对比
 
 - **无需安装的在线体验**：打开 [公开静态演示](https://away928.github.io/ai-research-agent/)。其中的公司、财务数字和分析文字均为**虚构/合成**，不是实时模型结果。
 - **本地交互演示**：安装 `requirements.txt` 后运行 `python -m streamlit run app.py`，点击「开始工作流演示」，按数据采集 → 行业全景 → 公司深度 → 投资研判 → 报告交付逐步体验。
-- **尝试真实研究**：切换「真实研究（使用数据源）」；无 Key 仅生成数据采集简报，有 Key 才尝试 AI 研究，可能产生费用。
-- **质量边界**：190 项离线测试通过；真实数据源与付费模型的全流程准确性、稳定性和投资有效性尚未验证。
+- **尝试真实研究**：仅在服务端显式启用并通过私人凭证验证后，才能选择「真实研究」；无模型 Key 只尝试生成数据采集简报，有 Key 才尝试 AI 分析，可能产生费用。
+- **质量边界**：197 项离线测试通过；真实数据源与付费模型的全流程准确性、稳定性和投资有效性尚未验证。
 
 报告中任何数据和结论都需要回查原始披露，**不构成投资建议**。欢迎通过 GitHub Issues 反馈可以复现的问题。
