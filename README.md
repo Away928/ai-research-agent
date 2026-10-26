@@ -2,7 +2,7 @@
 
 **An early-stage, evidence-aware workflow for investment research — from data collection to a reviewable report.**
 
-[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.2 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.2) · [MIT License](LICENSE) · [中文简介](#中文简介)
+[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.3 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.3) · [MIT License](LICENSE) · [中文简介](#中文简介)
 
 > **Demo-ready MVP, not an autonomous investment adviser.** The public demo uses **synthetic companies, synthetic data, and prewritten analysis**. It neither runs a live model nor retrieves real market data. The Streamlit interface is **synthetic-only by default**; private live research requires a server-side opt-in and independent access credential.
 
@@ -50,7 +50,7 @@ python3 -m venv .venv
 .venv/bin/python -m streamlit run app.py
 ```
 
-Select **“体验演示（无需配置）” / “Demo (no setup)”** and start the complete example. This demo requires **no financial or LLM API key**.
+The public app opens **directly into the synthetic walkthrough** (no needless one-option mode selector). Click **“▶ 开始工作流演示”**, then use **“下一阶段 →”** to review four research stages followed by a separate report-delivery step. Detailed evidence and the full report stay collapsed until the relevant step. This demo requires **no financial or LLM API key**.
 
 For a standalone HTML file you can share or open offline:
 
@@ -129,7 +129,7 @@ Contributions and reproducible bug reports are welcome: [Contributing](CONTRIBUT
 AI Research Agent 是一个将**公开数据采集、行业梳理、公司对比和研究报告**组织成四阶段流程的开源原型。
 
 - **无需安装的在线体验**：打开 [公开静态演示](https://away928.github.io/ai-research-agent/)。其中的公司、财务数字和分析文字均为**虚构/合成**，不是实时模型结果。
-- **本地交互演示**：安装 `requirements.txt` 后运行 `python -m streamlit run app.py`，选择「体验演示（无需配置）」。
+- **本地交互演示**：安装 `requirements.txt` 后运行 `python -m streamlit run app.py`，点击「开始工作流演示」，按数据采集 → 行业全景 → 公司深度 → 投资研判 → 报告交付逐步体验。
 - **尝试真实研究**：切换「真实研究（使用数据源）」；无 Key 仅生成数据采集简报，有 Key 才尝试 AI 研究，可能产生费用。
 - **质量边界**：190 项离线测试通过；真实数据源与付费模型的全流程准确性、稳定性和投资有效性尚未验证。
 

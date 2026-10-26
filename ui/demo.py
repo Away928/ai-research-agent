@@ -1,4 +1,9 @@
-"""A dedicated no-key demonstration interface, deliberately separate from live research."""
+"""Workflow-first, offline Streamlit demo from a fully synthetic fixture.
+
+This view never instantiates the live Agent, reads provider secrets, performs
+network I/O, or writes a research history. Its progress is *navigation* through
+prewritten stages, not a claim that an LLM is doing research.
+"""
 
 import pandas as pd
 import streamlit as st
@@ -7,144 +12,224 @@ from tools.demo_experience import build_demo
 from tools.demo_export import render_demo_html
 
 
-def render_demo():
+# Four research stages, plus the output they produce. Preserve this order.
+STEPS = (
+    ("数据采集", "预置合成数据、来源与口径"),
+    ("行业全景", "市场结构、产业链与待验证假设"),
+    ("公司深度", "公司对比、报告期与财务证据"),
+    ("投资研判", "研究假设、反方论证与风险"),
+    ("报告交付", "成果审阅、下载与复核范围"),
+)
+
+
+def _stepper(active_step: int) -> None:
+    """Compact, responsive overview of the workflow (not live progress)."""
+    items = []
+    for index, (name, _) in enumerate(STEPS, 1):
+        state = (" is-current" if active_step == index else
+                 " is-visited" if 0 < index < active_step else "")
+        items.append(
+            f'<li class="demo-step{state}">'
+            f'<span class="demo-step-number">{index:02d}</span>'
+            f'<span class="demo-step-name">{name}</span></li>'
+        )
     st.markdown(
-        '<div class="demo-eyebrow">PRODUCT WALKTHROUGH · v0.1 · SYNTHETIC</div>'
-        '<div class="demo-headline">一键体验一份完整的行业研究</div>'
-        '<p class="demo-lead">看清 AI Research Agent 如何组织结构化信息、比较企业、'
-        '提出投资假设并保留证据边界。无需账户、API Key 或金融数据连接。</p>',
+        '<ol class="demo-stepper" aria-label="预设研究工作流">'
+        + "".join(items) + "</ol>",
         unsafe_allow_html=True,
     )
-    with st.container(border=True):
-        st.markdown("**这份 Demo 能让你看到什么？**")
-        col_data, col_method, col_delivery = st.columns(3)
-        with col_data:
-            st.markdown("**01 · 数据可追溯**")
-            st.caption("虚构公司、财务指标、报告季度和引用标记")
-        with col_method:
-            st.markdown("**02 · 研究可审查**")
-            st.caption("行业全景、公司比较、假设与 Red Team 反方论证")
-        with col_delivery:
-            st.markdown("**03 · 成果可分享**")
-            st.caption("完整 Markdown 报告和可直接发送的离线 HTML")
 
-    st.info(
-        "🧪 **固定合成案例，并非真实 AI 运行。** 所有公司、财务数字及判断均为虚构，"
-        "不会联网、调用 LLM 或写入你的研究历史。"
+
+def _section_without_duplicate_heading(section: str) -> str:
+    """Use the original documented stage content without a duplicate H2."""
+    if section.startswith("## "):
+        return section.split("\n", 1)[1].strip()
+    return section
+
+
+def _render_data_stage(demo: dict) -> None:
+    st.markdown(
+        "本阶段从**内置合成快照**读取示例行业、公司和财务数据。"
+        "不是正在抓取真实行情，也没有运行模型。"
     )
+    c1, c2, c3 = st.columns(3)
+    c1.metric("虚构公司", len(demo["companies"]))
+    c2.metric("模拟总市值（亿元）", f'{demo["total_market_cap"]:.0f}')
+    c3.metric("快照性质", "完全合成")
 
-    if st.button(
-        "▶ 一键体验完整研究 Demo",
-        key="demo_launch",
-        type="primary",
-        width="stretch",
-    ):
-        st.session_state["demo_ready"] = True
-
-    if not st.session_state.get("demo_ready"):
-        st.caption("点击上方按钮直接查看完整研究成果。演示无费用，建议从「研究摘要」开始浏览。")
-        return
-
-    demo = build_demo()
-    st.success("示例研究已加载 · 四阶段预设内容 · 无网络、无模型费用")
-    st.markdown("### 演示成果总览")
-    st.caption("先浏览下方的研究摘要与公司比较，或直接获取完整可分享的文件。")
-    download_html, download_markdown = st.columns(2)
-    with download_html:
-        st.download_button(
-            "📥 下载独立展示网页（HTML）",
-            data=render_demo_html(demo),
-            file_name="Research_Agent_纯合成数据_独立演示.html",
-            mime="text/html",
-            key="demo_share_html",
-            width="stretch",
-            help="无需安装，可在浏览器中打开；仅包含合成研究案例。",
+    rows = [
+        {"数据类型": label,
+         "来源": demo["package"].get(key, {}).get("source", "未提供"),
+         "性质": "合成数据 · 非实时"}
+        for key, label in (
+            ("market_data", "行情"), ("financial_data", "财务"),
+            ("announcement_data", "公告"), ("news_data", "新闻"),
         )
-    with download_markdown:
+    ]
+    st.markdown("#### 数据来源与范围")
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+    st.caption("所有证券及相关数值均为虚构；标签仅用于模拟证据追踪。")
+    with st.expander("查看合成快照与流程元数据", expanded=False):
+        st.json({
+            "mode": "offline_synthetic_demo",
+            "fixture_snapshot": demo["snapshot_date"],
+            "research_stages": list(demo["sections"]),
+            "model_called": False,
+            "network_called": False,
+        })
+
+
+def _render_industry_stage(demo: dict) -> None:
+    st.markdown(_section_without_duplicate_heading(
+        demo["sections"]["industry_overview"]))
+    st.caption("这里展示预先写好的情境分析，不代表实际行业调查或实时推理。")
+
+
+def _render_company_stage(demo: dict) -> None:
+    a, b = st.columns(2)
+    a.metric("合成样本平均 ROE（%）", f'{demo["average_roe"]:.1f}')
+    b.metric("收入增速报告期", "不可直接比较" if not demo["growth_comparable"] else "一致")
+
+    rows = [
+        {
+            "公司": company["name"],
+            "模拟 PE": company["pe"],
+            "ROE（%）": company["roe_pct"],
+            "毛利率（%）": company["gross_margin_pct"],
+            "收入同比（%）": company["revenue_growth_pct"],
+            "收入同比报告期": (company.get("_metric_periods") or {}).get(
+                "revenue_growth_pct"),
+        }
+        for company in demo["companies"]
+    ]
+    comparison = pd.DataFrame(rows)
+    st.markdown("#### 两家虚构公司对比")
+    st.dataframe(comparison, hide_index=True, width="stretch")
+    if not demo["growth_comparable"]:
+        st.warning("收入增速来自不同报告季度，不能直接计算横截面平均增长率。")
+    with st.expander("查看可比财务指标图", expanded=False):
+        st.bar_chart(comparison.set_index("公司")[["ROE（%）", "毛利率（%）"]])
+    # The structured company table above replaces the duplicate Markdown table
+    # in the prewritten stage; retain its original reading and limitation text.
+    full = demo["sections"]["company_deep_dive"]
+    if "### 数据阅读" in full:
+        st.markdown("#### 数据阅读" + full.split("### 数据阅读", 1)[1])
+    else:
+        st.markdown(_section_without_duplicate_heading(full))
+    st.caption("仅展示两家虚构公司，不对应真实证券。")
+
+
+def _render_thesis_stage(demo: dict) -> None:
+    st.markdown(_section_without_duplicate_heading(
+        demo["sections"]["investment_thesis"]))
+    st.caption("以上论证是预设教学案例，未由 LLM 实时生成，不构成投资建议。")
+
+
+def _render_delivery_stage(demo: dict) -> None:
+    st.markdown(demo["summary"])
+    st.markdown("#### 获取本次演示交付物")
+    left, right = st.columns(2)
+    with left:
         st.download_button(
-            "📄 下载完整研究报告（Markdown）",
+            "📄 下载完整研究报告",
             data=demo["report"],
             file_name="Research_Agent_合成数据_演示报告.md",
             mime="text/markdown",
             key="demo_download",
             width="stretch",
         )
-    cols = st.columns(4)
-    with cols[0]:
-        st.metric("合成公司", len(demo["companies"]))
-    with cols[1]:
-        st.metric("模拟总市值（亿元）", f"{demo['total_market_cap']:.0f}")
-    with cols[2]:
-        st.metric("平均 ROE（%）", f"{demo['average_roe']:.1f}")
-    with cols[3]:
-        st.metric("收入增速报告期", "不一致" if not demo["growth_comparable"]
-                  else "一致")
-    if not demo["growth_comparable"]:
-        st.caption("主营业务收入同比来自不同季度，不计算样本平均值。")
-
-    st.markdown("#### 四阶段研究路径")
-    for i, (title, detail) in enumerate((
-        ("数据采集", "读取内置合成快照"),
-        ("行业全景", "构建规模、格局和待核实假设"),
-        ("公司深度", "比较指标、所属季度与证据标签"),
-        ("投资研判", "研究假设、反方观点与风险核验"),
-    ), start=1):
-        st.markdown(f"**{i}. {title}** · {detail}")
-
-    tabs = st.tabs(["01 · 研究摘要", "02 · 公司比较", "03 · 完整报告", "04 · 证据与限制"])
-    with tabs[0]:
-        st.markdown(demo["summary"])
-        st.markdown(demo["sections"]["industry_overview"])
-        st.markdown(demo["sections"]["investment_thesis"])
-    with tabs[1]:
-        comparison = pd.DataFrame([
-            {
-                "公司": c["name"], "代码": c["code"],
-                "模拟市值（亿元）": c["market_cap_billion"], "模拟 PE": c["pe"],
-                "ROE（%）": c["roe_pct"], "毛利率（%）": c["gross_margin_pct"],
-                "主营业务收入同比（%）": c["revenue_growth_pct"],
-                "资产负债率（%）": c["debt_ratio_pct"],
-                "ROE 报告期": (c.get("_metric_periods") or {}).get("roe_pct"),
-            }
-            for c in demo["companies"]
-        ])
-        st.dataframe(comparison, hide_index=True, width="stretch")
-        st.bar_chart(comparison.set_index("公司")[["ROE（%）", "毛利率（%）"]])
-        st.caption("仅展示两家虚构公司，不能外推真实行业结论。")
-        st.markdown(demo["sections"]["company_deep_dive"])
-    with tabs[2]:
-        st.caption("此处展示完整 Markdown 正文、采集来源标签、财务数字对照和工作流附录。")
+    with right:
+        st.download_button(
+            "🌐 下载独立演示网页",
+            data=render_demo_html(demo),
+            file_name="Research_Agent_纯合成数据_独立演示.html",
+            mime="text/html",
+            key="demo_share_html",
+            width="stretch",
+            help="浏览器离线可读；不会运行研究或请求外部数据。",
+        )
+    with st.expander("审阅完整 Markdown 报告", expanded=False):
         st.markdown(demo["report"])
-    with tabs[3]:
+    with st.expander("证据边界与尚未验证的事项", expanded=False):
         st.markdown(
-            "**哪些环节可以复核？** 预设行业数据、两家公司的每项财务数字、所属季度，"
-            "以及报告正文中带 FIN 标记的数字，可以对照本次合成数据快照。"
+            "**可复核：** 合成输入快照、公司财务数字、报告季度、"
+            "正文中的 FIN 引用标记及格式化过程。\n\n"
+            "**不可推断：** 真实市场事实、供应商数据可靠性、实际 LLM 推理质量、"
+            "真实投资结果。本次没有调用金融数据接口或大模型。"
         )
-        st.markdown(
-            "**哪些结论没有被验证？** 真实市场事实、供应商数据真实性、"
-            "AI 在真实研究中的推理质量、真实投资决策结果。"
-        )
-        source_rows = [
-            {"数据维度": title,
-             "来源标签": demo["package"].get(key, {}).get("source", "未提供"),
-             "类别": "合成数据"}
-            for key, title in (
-                ("market_data", "行情"), ("financial_data", "财务"),
-                ("announcement_data", "公告"), ("news_data", "新闻"),
-            )
-        ]
-        st.dataframe(pd.DataFrame(source_rows), hide_index=True, width="stretch")
-        with st.expander("查看演示快照与流程元数据"):
-            st.json({
-                "mode": "offline_synthetic_demo",
-                "fixture_snapshot": demo["snapshot_date"],
-                "stages": list(demo["sections"]),
-                "model_called": False,
-                "network_called": False,
-                "report_characters": len(demo["report"]),
-            })
-    st.divider()
-    st.caption(
-        "想运行自己的行业研究？在页面顶部选择「🔬 真实研究」，再配置数据源与模型。"
-        "真实模式依赖在线接口，研究结果仍须独立核验。"
+
+
+def render_demo() -> None:
+    st.markdown(
+        '<div class="demo-eyebrow">INTERACTIVE WALKTHROUGH · SYNTHETIC DATA</div>'
+        '<div class="demo-headline">沿研究工作流，逐步完成一份行业研究</div>'
+        '<p class="demo-lead">从合成数据到行业判断、公司比较、反方论证与最终报告。'
+        '每一步只展示当下需要的内容，支持前后切换和下载成果。</p>',
+        unsafe_allow_html=True,
     )
+    st.caption("🧪 预设离线案例 · 不连接真实数据源 · 不调用 LLM · 不产生模型费用")
+
+    current_step = int(st.session_state.get("demo_step", 0))
+    if current_step < 0 or current_step > len(STEPS):
+        current_step = 0
+        st.session_state["demo_step"] = 0
+    _stepper(current_step)
+    if current_step == 0:
+        st.markdown("#### 四阶段研究 + 最终交付")
+        st.markdown(
+            "点击开始，从数据采集进入行业全景、公司深度、投资研判，"
+            "最后查看报告及证据边界。整个过程是**交互式浏览预设案例**，"
+            "不是模拟真实的网络请求或模型执行。"
+        )
+        if st.button(
+            "▶ 开始工作流演示",
+            key="demo_launch",
+            type="primary",
+            width="stretch",
+        ):
+            st.session_state["demo_step"] = 1
+            st.rerun()
+        return
+
+    demo = build_demo()
+    title, subheading = STEPS[current_step - 1]
+    st.progress(current_step / len(STEPS),
+                text=f"研究演示 · 第 {current_step} / {len(STEPS)} 步")
+    st.markdown(f"### {current_step:02d} · {title}")
+    st.caption(subheading)
+
+    if current_step == 1:
+        _render_data_stage(demo)
+    elif current_step == 2:
+        _render_industry_stage(demo)
+    elif current_step == 3:
+        _render_company_stage(demo)
+    elif current_step == 4:
+        _render_thesis_stage(demo)
+    else:
+        _render_delivery_stage(demo)
+
+    st.divider()
+    previous, next_stage = st.columns(2)
+    with previous:
+        if st.button(
+            "← 上一阶段",
+            key="demo_prev",
+            disabled=current_step == 1,
+            width="stretch",
+        ):
+            st.session_state["demo_step"] = current_step - 1
+            st.rerun()
+    with next_stage:
+        if current_step < len(STEPS):
+            if st.button(
+                "下一阶段 →",
+                key="demo_next",
+                type="primary",
+                width="stretch",
+            ):
+                st.session_state["demo_step"] = current_step + 1
+                st.rerun()
+        elif st.button("↻ 重新体验", key="demo_restart", width="stretch"):
+            st.session_state["demo_step"] = 0
+            st.rerun()

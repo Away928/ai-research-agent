@@ -100,13 +100,13 @@ def main():
          patch.object(requests.sessions.Session, "request", network_forbidden):
         test = AppTest.from_file(str(ROOT / "app.py"), default_timeout=20).run()
         assert not test.exception, [e.message for e in test.exception]
-        assert test.radio[0].options == ["🧪 体验演示（无需配置）"]
+        assert len(test.radio) == 0
         assert not any(b.label == "🔍 开始研究" for b in test.button)
         token_box = next(x for x in test.text_input if x.label == "私人访问凭证")
         token_box.set_value("definitely-wrong")
         next(b for b in test.button if b.label == "解锁私人研究").click().run()
         assert not test.exception, [e.message for e in test.exception]
-        assert test.radio[0].options == ["🧪 体验演示（无需配置）"]
+        assert len(test.radio) == 0
         token_box = next(x for x in test.text_input if x.label == "私人访问凭证")
         token_box.set_value(synthetic_owner_token)
         next(b for b in test.button if b.label == "解锁私人研究").click().run()

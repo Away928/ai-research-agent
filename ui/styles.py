@@ -71,6 +71,60 @@ CUSTOM_CSS = """\
     margin: 0 0 1.2rem;
 }
 
+/* ── 合成演示：单阶段工作流导航 ──────────────────────── */
+.demo-stepper {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+.demo-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    border: 1px solid #dbe3ed;
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.55rem;
+    background: #fff;
+    color: #708094;
+}
+.demo-step-number {
+    font-weight: 700;
+    font-size: 0.76rem;
+    flex: 0 0 auto;
+}
+.demo-step-name {
+    min-width: 0;
+    font-size: 0.79rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.demo-step.is-visited {
+    color: #186847;
+    background: #f3faf6;
+    border-color: #bbdcc9;
+}
+.demo-step.is-current {
+    color: #174a88;
+    border-color: #376cae;
+    background: #eef4fd;
+    box-shadow: inset 0 0 0 1px #376cae;
+}
+@media (max-width: 620px) {
+    .demo-stepper { gap: 0.2rem; }
+    .demo-step {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.17rem;
+        padding: 0.5rem 0.24rem;
+    }
+    .demo-step-number { font-size: 0.69rem; }
+    .demo-step-name { font-size: 0.66rem; line-height: 1.2; }
+}
+
 /* ── Pipeline 时间轴 ───────────────────────────────────── */
 .pipeline-track {
     display: flex;

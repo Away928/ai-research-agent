@@ -7,7 +7,7 @@ The [public browser demo](https://away928.github.io/ai-research-agent/) is the e
 | Path | Steps | What a visitor sees |
 | --- | --- | --- |
 | Browser, no setup | Open [GitHub Pages](https://away928.github.io/ai-research-agent/) | Fictional companies, four-step research flow, financial comparisons and prewritten report |
-| Interactive local demo | Install requirements; run `python -m streamlit run app.py`; select “体验演示” | Streamlit charts/tables, the synthetic four-stage example and downloads |
+| Interactive local demo | Install requirements; run `python -m streamlit run app.py`; click “开始工作流演示” and advance one stage at a time | Four progressively revealed synthetic research stages; final report downloads only in the delivery step |
 | Private data collection | After server authorization, select “真实研究” and an industry | Attempt to retrieve available public finance data; **not** an AI investment conclusion without a model |
 | Private model-assisted research | Enable private access and configure a supported LLM provider yourself | Attempts the model-assisted pipeline; may incur fees and requires independent validation |
 
@@ -18,6 +18,16 @@ python scripts/export_demo.py
 ```
 
 This produces an offline HTML file under `demo_output/`. Generated files are not included in a clean clone.
+
+## Interactive Streamlit step order
+
+1. **数据采集** — source provenance and the fictional input snapshot.
+2. **行业全景** — industry structure and explicit assumptions.
+3. **公司深度** — two-company comparison with financial period warnings.
+4. **投资研判** — thesis, counterarguments (Red Team) and risk checks.
+5. **报告交付** — complete Markdown report and HTML download; detailed evidence/limitations in optional expanders.
+
+Only one stage is shown at a time. Use “上一阶段” / “下一阶段” to navigate. The step indicator reflects **navigation through a prewritten demonstration**, not live model execution. The offline static GitHub Pages demo remains a separate presentation and has not been changed by this interface update.
 
 ## A three-minute walkthrough
 

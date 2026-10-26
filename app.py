@@ -127,12 +127,16 @@ elif live_configured and st.session_state.get("live_unlocked", False):
             st.rerun()
 
 live_allowed = live_configured and bool(st.session_state.get("live_unlocked", False))
-experience = st.radio(
-    "选择体验方式",
-    [demo_option, live_option] if live_allowed else [demo_option],
-    horizontal=True,
-    key="experience_mode",
-)
+if live_allowed:
+    experience = st.radio(
+        "选择体验方式",
+        [demo_option, live_option],
+        horizontal=True,
+        key="experience_mode",
+    )
+else:
+    # A public-only app has no choice to make. Avoid a redundant one-item radio.
+    experience = demo_option
 
 if experience.startswith("🧪"):
     # This path deliberately never instantiates the live agent or API client.

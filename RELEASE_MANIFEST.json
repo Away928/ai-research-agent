@@ -1,5 +1,5 @@
 {
-  "release": "v0.1.2",
+  "release": "v0.1.3",
   "origin_history_included": false,
   "all_files_allowlisted": true,
   "files": [
@@ -25,8 +25,8 @@
     },
     {
       "path": "DEMO_GUIDE.md",
-      "sha256": "86c0724eff4921286e7fc19e0d82c2a8fa4baf63b903d62e1386e85209c1b5bc",
-      "bytes": 2887
+      "sha256": "a3879594f8fc1f114a6d835e67b57b09403f644c18b7c04ae8cea988020baf4b",
+      "bytes": 3737
     },
     {
       "path": "LICENSE",
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "d42792192447158f7109237b9ea171497215474e226a04912b122df5730fda98",
-      "bytes": 8961
+      "sha256": "0e4cde8965dd1f3596ff867c6b2c296d3fa02b19fd268216f25068510990002c",
+      "bytes": 9284
     },
     {
       "path": "SECURITY.md",
@@ -50,8 +50,8 @@
     },
     {
       "path": "V0.1_ACCEPTANCE.md",
-      "sha256": "b1e025769f0be5ddeecef342bbd96728defa6b0af60ba265ec82ec4bc0fcbd38",
-      "bytes": 2833
+      "sha256": "91cd7f5c4ea5a706f03507d2fa33265b5bfc60f9cc8bd0de7a8009c7b8ed4c58",
+      "bytes": 2831
     },
     {
       "path": "agent_helpers.py",
@@ -65,8 +65,8 @@
     },
     {
       "path": "app.py",
-      "sha256": "80e7b77f3e26fe7adc2b9f0f18831a9655c4843c857f12f28a8d1625d6e19f56",
-      "bytes": 14799
+      "sha256": "c66a8c69f0adfa9f2a400aa75284d4161de799a95da80038d2386eba03b8efec",
+      "bytes": 14921
     },
     {
       "path": "cli.py",
@@ -125,13 +125,13 @@
     },
     {
       "path": "scripts/verify_demo.py",
-      "sha256": "609663d17434349a632114d19e5846047a05e85aa73e784370ff85756328214a",
-      "bytes": 2014
+      "sha256": "a861d056c26f7cdc638321bb8f43c63b5d91da91d07cd1cb2ea9610c8d3815d3",
+      "bytes": 4073
     },
     {
       "path": "scripts/verify_real_entry.py",
-      "sha256": "3a8d52cbca074e8a319297fcc0fddf48b31179c00fa9615c96057907d7432665",
-      "bytes": 10224
+      "sha256": "6ebb2c277aa51271c92deb6dabad0b9cef90016638e7892f639bc29352ead869",
+      "bytes": 10136
     },
     {
       "path": "scripts/verify_v01.py",
@@ -375,8 +375,8 @@
     },
     {
       "path": "ui/demo.py",
-      "sha256": "8ec9f542f0118f5ff960252b202c789d6d1bd983fee39daca704dca5c63da6e5",
-      "bytes": 6910
+      "sha256": "39c121a7fb6ca4fad34399ec7e4b1ddabdba2557c802a7e16a72789f45096816",
+      "bytes": 9455
     },
     {
       "path": "ui/input_area.py",
@@ -400,8 +400,8 @@
     },
     {
       "path": "ui/styles.py",
-      "sha256": "c07197f548f1f931afe16c998915e881f9322239b916a05f992f8d4be639a6e2",
-      "bytes": 10407
+      "sha256": "3d067f27bca7ff6355dd8273a8e4fb23bf6c119bc582b6637e58cc6efa72eff6",
+      "bytes": 11688
     },
     {
       "path": "ui/welcome.py",
