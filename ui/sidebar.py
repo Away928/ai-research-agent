@@ -157,8 +157,7 @@ def _render_footer():
         if readme_path.exists():
             st.markdown(readme_path.read_text(encoding="utf-8"))
     st.divider()
-    st.caption("作者：William Lu")
-    st.caption("CUHKSZ 金融 2028 届")
+    st.caption("AI Research Agent · Local / private research mode")
     st.caption("[GitHub](https://github.com/Away928/ai-research-agent)")
 
 

@@ -1,6 +1,6 @@
 # Research Agent v0.1 — Demo guide
 
-The [public browser demo](https://away928.github.io/ai-research-agent/) is the easiest way to showcase the project. It is a **fixed synthetic case study**, not a live financial-data or AI workflow.
+The [public browser demo](https://away928.github.io/ai-research-agent/) is the easiest way to showcase the project. It is a **fixed synthetic case study**, not a live financial-data or AI workflow. The [Streamlit app](https://ai-research-agent928.streamlit.app/) adds an interactive synthetic experience when its hosting access is public; private real research requires separate owner authorization per [Streamlit Deployment](STREAMLIT_DEPLOYMENT.md).
 
 ## Choose a demo path
 
@@ -8,8 +8,8 @@ The [public browser demo](https://away928.github.io/ai-research-agent/) is the e
 | --- | --- | --- |
 | Browser, no setup | Open [GitHub Pages](https://away928.github.io/ai-research-agent/) | Fictional companies, four-step research flow, financial comparisons and prewritten report |
 | Interactive local demo | Install requirements; run `python -m streamlit run app.py`; select “体验演示” | Streamlit charts/tables, the synthetic four-stage example and downloads |
-| Local data collection | Select “真实研究” and an industry | Attempt to retrieve available public finance data; **not** an AI investment conclusion without a model |
-| Model-assisted research | Configure a supported LLM provider yourself | Attempts the model-assisted pipeline; may incur fees and requires independent validation |
+| Private data collection | After server authorization, select “真实研究” and an industry | Attempt to retrieve available public finance data; **not** an AI investment conclusion without a model |
+| Private model-assisted research | Enable private access and configure a supported LLM provider yourself | Attempts the model-assisted pipeline; may incur fees and requires independent validation |
 
 The static demo can also be exported locally:
 

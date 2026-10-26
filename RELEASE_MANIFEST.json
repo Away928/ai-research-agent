@@ -1,5 +1,5 @@
 {
-  "release": "v0.1.1",
+  "release": "v0.1.2",
   "origin_history_included": false,
   "all_files_allowlisted": true,
   "files": [
@@ -25,8 +25,8 @@
     },
     {
       "path": "DEMO_GUIDE.md",
-      "sha256": "e3db2fd804ba725e1b40e141ee923a5a78d7ee07038d01d8c4d956c12e2d1f89",
-      "bytes": 2569
+      "sha256": "86c0724eff4921286e7fc19e0d82c2a8fa4baf63b903d62e1386e85209c1b5bc",
+      "bytes": 2887
     },
     {
       "path": "LICENSE",
@@ -35,8 +35,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "89d5bc0bd4682f820a6f85d799d60e61159ea031a24542b6a5047bd4c194dd84",
-      "bytes": 7743
+      "sha256": "d42792192447158f7109237b9ea171497215474e226a04912b122df5730fda98",
+      "bytes": 8961
     },
     {
       "path": "SECURITY.md",
@@ -44,9 +44,14 @@
       "bytes": 1162
     },
     {
+      "path": "STREAMLIT_DEPLOYMENT.md",
+      "sha256": "032ba66c7d20fff1ca6579b77f39c9e153a97872e885130739d697a1124d4c7f",
+      "bytes": 5859
+    },
+    {
       "path": "V0.1_ACCEPTANCE.md",
-      "sha256": "63da65ffae641c67ebfc62199150611eefde5a9264da6a238006e6eb0cca400b",
-      "bytes": 2588
+      "sha256": "b1e025769f0be5ddeecef342bbd96728defa6b0af60ba265ec82ec4bc0fcbd38",
+      "bytes": 2833
     },
     {
       "path": "agent_helpers.py",
@@ -60,8 +65,8 @@
     },
     {
       "path": "app.py",
-      "sha256": "f688da6dcb6e03597289dddaa3499478487068f05f9ecaf88c5bcbf6b2c9ab69",
-      "bytes": 12449
+      "sha256": "80e7b77f3e26fe7adc2b9f0f18831a9655c4843c857f12f28a8d1625d6e19f56",
+      "bytes": 14799
     },
     {
       "path": "cli.py",
@@ -120,13 +125,13 @@
     },
     {
       "path": "scripts/verify_demo.py",
-      "sha256": "625aaf802be9d1f79f267eda1390f03a3aa668f192427589df05a39f2d01b1bf",
-      "bytes": 1749
+      "sha256": "609663d17434349a632114d19e5846047a05e85aa73e784370ff85756328214a",
+      "bytes": 2014
     },
     {
       "path": "scripts/verify_real_entry.py",
-      "sha256": "b8400b81300926724cb88003064536eb03aefde84b354e3e0a68ad87f6dbcea4",
-      "bytes": 8828
+      "sha256": "3a8d52cbca074e8a319297fcc0fddf48b31179c00fa9615c96057907d7432665",
+      "bytes": 10224
     },
     {
       "path": "scripts/verify_v01.py",
@@ -177,6 +182,11 @@
       "path": "tests/test_demo_export.py",
       "sha256": "cecd7d787e4a615d8c9558eed86ff11d96f47a8dba72c2f372670a087ac283b4",
       "bytes": 2812
+    },
+    {
+      "path": "tests/test_live_access.py",
+      "sha256": "ca10df05ff6ef9dce281d2b57bcd1a39c77be6f3b8a49370daecf60a0d7e4706",
+      "bytes": 1704
     },
     {
       "path": "tests/test_offline_research_workflow.py",
@@ -374,14 +384,19 @@
       "bytes": 2591
     },
     {
+      "path": "ui/live_access.py",
+      "sha256": "6a14e7f8e19d2cdc0038d8d7f8eaa5deec704496e90753201f132e5a5f4e1b81",
+      "bytes": 1102
+    },
+    {
       "path": "ui/research_result.py",
       "sha256": "3ef42e9908bde287bbd7e40c9ce0cccbe665ad8146fa68b263566c0b4228276e",
       "bytes": 4691
     },
     {
       "path": "ui/sidebar.py",
-      "sha256": "207cbc0bb378b9745085f2b7a9f93998587ab54d3cbdc02ea9dbd2d345ea663f",
-      "bytes": 7641
+      "sha256": "37e69dc1fe5ee1eb5783bd71de7b7787a8eed31bd5f77faecbbf47f0cde00550",
+      "bytes": 7631
     },
     {
       "path": "ui/styles.py",

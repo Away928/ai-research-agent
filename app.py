@@ -25,6 +25,7 @@ from ui.data_cards import render_data_cards
 from ui.charts import render_market_charts
 from ui.welcome import render_welcome
 from ui.research_result import build_run_result, render_run_result
+from ui.live_access import live_access_configured, verify_live_token
 
 
 # ── 页面配置 ──────────────────────────────────────────────
@@ -88,10 +89,47 @@ st.divider()
 
 
 # ── 选择体验方式 ───────────────────────────────────────────
+# Public deployments intentionally offer only the synthetic offline demo.
+# Merely knowing this app's URL or a provider API key must never expose the
+# network/LLM path. An owner must configure BOTH server-side options and
+# provide the independent access token before the real-research UI is built.
+demo_option = "🧪 体验演示（无需配置）"
+live_option = "🔬 真实研究（使用数据源）"
+live_configured = live_access_configured()
+if live_configured and not st.session_state.get("live_unlocked", False):
+    with st.sidebar:
+        st.markdown("#### 🔐 私人研究入口")
+        st.caption("仅限授权使用。公开演示不调用数据源或大模型。")
+        with st.form("private_live_access", clear_on_submit=True):
+            owner_token = st.text_input(
+                "私人访问凭证", type="password", autocomplete="off",
+                help="此凭证不同于模型 API Key；不会上传到 GitHub。")
+            submitted = st.form_submit_button("解锁私人研究")
+        if submitted:
+            if verify_live_token(owner_token):
+                st.session_state["live_unlocked"] = True
+                st.rerun()
+            else:
+                st.error("凭证无效。")
+elif live_configured and st.session_state.get("live_unlocked", False):
+    with st.sidebar:
+        st.caption("🔓 已授权使用私人研究")
+        if st.button("锁定私人研究", key="lock_live"):
+            st.session_state["live_unlocked"] = False
+            # Drop private widget values/results when the owner locks the UI.
+            for key in list(st.session_state):
+                if key.startswith("sidebar_apikey_") or key in {
+                    "real_last_result", "experience_mode", "input_uploader",
+                    "input_select", "sidebar_baseurl", "sidebar_model",
+                    "sidebar_backend",
+                }:
+                    st.session_state.pop(key, None)
+            st.rerun()
 
+live_allowed = live_configured and bool(st.session_state.get("live_unlocked", False))
 experience = st.radio(
     "选择体验方式",
-    ["🧪 体验演示（无需配置）", "🔬 真实研究（使用数据源）"],
+    [demo_option, live_option] if live_allowed else [demo_option],
     horizontal=True,
     key="experience_mode",
 )
@@ -103,6 +141,10 @@ if experience.startswith("🧪"):
     industry = ""
     started = False
 else:
+    # Defense in depth against forged UI state or accidental feature exposure.
+    if not (live_access_configured() and st.session_state.get("live_unlocked", False)):
+        st.error("真实研究未获得服务端授权。")
+        st.stop()
     sidebar_config = render_sidebar(AVAILABLE_INDUSTRIES)
     model_backend = sidebar_config["model_backend"]
     api_key = sidebar_config["api_key"]

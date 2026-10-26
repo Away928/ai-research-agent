@@ -7,6 +7,7 @@ This tests the real-mode UI, not the fidelity of live APIs or model outputs.
 """
 from unittest.mock import patch
 from pathlib import Path
+import hashlib
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,9 +87,32 @@ def main():
     def network_forbidden(*args, **kwargs):
         raise AssertionError("A real network request occurred during a UI smoke test")
 
-    with patch.object(agent_workflow, "AIResearchAgentV2", FakeOfflineAgent),          patch.object(agent_workflow, "_append_history", lambda *args: None),          patch.object(requests.sessions.Session, "request", network_forbidden):
+    # Authorization is entirely simulated. Never use a provider key or real network.
+    synthetic_owner_token = "local-synthetic-test-owner-token"
+    enable_private = {
+        "AGENT_LIVE_RESEARCH_ENABLED": "1",
+        "AGENT_LIVE_ACCESS_SHA256": hashlib.sha256(
+            synthetic_owner_token.encode("utf-8")).hexdigest(),
+    }
+    with patch.dict("os.environ", enable_private), \
+         patch.object(agent_workflow, "AIResearchAgentV2", FakeOfflineAgent), \
+         patch.object(agent_workflow, "_append_history", lambda *args: None), \
+         patch.object(requests.sessions.Session, "request", network_forbidden):
         test = AppTest.from_file(str(ROOT / "app.py"), default_timeout=20).run()
         assert not test.exception, [e.message for e in test.exception]
+        assert test.radio[0].options == ["🧪 体验演示（无需配置）"]
+        assert not any(b.label == "🔍 开始研究" for b in test.button)
+        token_box = next(x for x in test.text_input if x.label == "私人访问凭证")
+        token_box.set_value("definitely-wrong")
+        next(b for b in test.button if b.label == "解锁私人研究").click().run()
+        assert not test.exception, [e.message for e in test.exception]
+        assert test.radio[0].options == ["🧪 体验演示（无需配置）"]
+        token_box = next(x for x in test.text_input if x.label == "私人访问凭证")
+        token_box.set_value(synthetic_owner_token)
+        next(b for b in test.button if b.label == "解锁私人研究").click().run()
+        assert not test.exception, [e.message for e in test.exception]
+        assert "🔬 真实研究（使用数据源）" in test.radio[0].options
+        print("PASS: private live UI requires explicit server config and token")
         test.radio[0].set_value("🔬 真实研究（使用数据源）").run()
         assert not test.exception, [e.message for e in test.exception]
         start = next(b for b in test.button if b.label == "🔍 开始研究")

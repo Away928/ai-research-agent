@@ -2,9 +2,11 @@
 
 **An early-stage, evidence-aware workflow for investment research — from data collection to a reviewable report.**
 
-[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.0 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.1) · [MIT License](LICENSE) · [中文简介](#中文简介)
+[Try the public demo](https://away928.github.io/ai-research-agent/) · [v0.1.2 release](https://github.com/Away928/ai-research-agent/releases/tag/v0.1.2) · [MIT License](LICENSE) · [中文简介](#中文简介)
 
-> **Demo-ready MVP, not an autonomous investment adviser.** The public demo uses **synthetic companies, synthetic data, and prewritten analysis**. It neither runs a live model nor retrieves real market data.
+> **Demo-ready MVP, not an autonomous investment adviser.** The public demo uses **synthetic companies, synthetic data, and prewritten analysis**. It neither runs a live model nor retrieves real market data. The Streamlit interface is **synthetic-only by default**; private live research requires a server-side opt-in and independent access credential.
+
+**Interactive Streamlit app:** [ai-research-agent928.streamlit.app](https://ai-research-agent928.streamlit.app/) — once the hosting owner sets its Cloud **Sharing** setting to public, visitors can run the synthetic demo without signing in. The code itself is already safe-by-default; the hosted app's sharing status must be checked separately. See [Streamlit deployment and private-mode security](STREAMLIT_DEPLOYMENT.md).
 
 ## See it first — no setup
 
@@ -62,11 +64,13 @@ The command writes to `demo_output/`. New clones do **not** contain a pre-genera
 
 Switch to **“真实研究（使用数据源）”** in the Streamlit interface and choose an industry.
 
-- **Without an LLM key:** the app attempts public-data collection and, where observations are available, prepares a **data-collection brief**, **not** a generated investment thesis.
-- **With an LLM key:** the app attempts the model-assisted workflow. Model/API access can incur charges and fail due to authentication, network access, quotas or provider changes; success is not guaranteed.
+- **Access first:** Real research is not present on the public demo. An owner must separately enable and unlock it in a private deployment; follow [deployment and access instructions](STREAMLIT_DEPLOYMENT.md).
+- **Without an LLM key, after private unlock:** the app attempts public-data collection and, where observations are available, prepares a **data-collection brief**, **not** a generated investment thesis.
+- **With an LLM key, after private unlock:** the app attempts the model-assisted workflow. Model/API access can incur charges and fail due to authentication, network access, quotas or provider changes; success is not guaranteed.
 - **With user-provided material:** only upload content that you have the right to share with a selected model or service.
 
-The command-line entrypoint is also available:
+The local CLI is a separate program; unlike the shared Streamlit UI it does not use the browser access gate. Use it **only on a machine you control**:
+
 
 ```bash
 .venv/bin/python cli.py --industry "半导体"
@@ -83,7 +87,7 @@ For the complete offline regression and UI acceptance suite:
 .venv/bin/python scripts/verify_v01.py
 ```
 
-This includes Python tests, simulated Streamlit interactions, CLI smoke checks and HTML export verification. The v0.1 release passed **190 offline tests**; [GitHub Actions](https://github.com/Away928/ai-research-agent/actions) also verifies supported Python versions and full-install smoke tests.
+This includes Python tests, simulated Streamlit interactions, CLI smoke checks and HTML export verification. The original v0.1 release passed **190 offline tests**. The deployment safety update adds server-access regression tests. [GitHub Actions](https://github.com/Away928/ai-research-agent/actions) verifies supported Python versions and full-install smoke tests.
 
 There is a deliberately narrow distinction between **data consistency** and **factual correctness**:
 
@@ -114,7 +118,7 @@ scripts/              Demo export and acceptance checks
 
 This is a **research-assistance prototype**, not financial advice or a verified investment recommendation. Public sources can be missing, delayed, inconsistent or inaccurately parsed; generated text can invent numbers or misinterpret a document. **Check official filings and source timestamps before using any output.** Do not enter real client records, nonpublic material, personal identifiers or credentials into the demo.
 
-The static website is the supported **public showcase**. The interactive app is intended for **local experimentation**; it is not a hardened multi-user service. Its external data and model pipeline has not passed production-grade end-to-end evaluation.
+The [static browser showcase](https://away928.github.io/ai-research-agent/) remains the always-public, zero-setup reference. The Streamlit app supports a **public interactive synthetic demo** after its Cloud sharing setting is opened, and a **separately enabled private owner research mode**. It is not a hardened multi-user service; its external data/model pipeline has not passed production-grade end-to-end evaluation. See [deployment guide](STREAMLIT_DEPLOYMENT.md).
 
 Contributions and reproducible bug reports are welcome: [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/Away928/ai-research-agent/issues) · [Security](SECURITY.md).
 
