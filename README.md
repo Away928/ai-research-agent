@@ -130,6 +130,8 @@ Contributions and reproducible bug reports are welcome: [Contributing](CONTRIBUT
 
 ## 中文简介
 
+**项目状态**：持续开发中。后续将持续完善功能、文档及实际应用案例。
+
 AI Research Agent 是一个面向投资研究的开源 AI Agent，整合金融数据采集、行业分析、公司比较与投资研判，形成完整的研究工作流，并生成可供审阅的研究报告。
 
 **真实运行案例**：[AI 算力研究（2026 年 10 月）](case-studies/ai-compute-2026-10.md)
