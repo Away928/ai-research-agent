@@ -16,6 +16,12 @@ Explore an example four-stage research narrative, two fictional companies, compa
 
 To explore the **interactive** offline demo on your computer, run Streamlit as described below. The Streamlit Cloud sharing state must be verified independently in an unauthenticated session; the static demo remains an always-public fallback.
 
+## Historical real-data case study
+
+The agent was used for a **historical A-share semiconductor research run in July 2026**, with local execution records, public-data source labels and an AI-assisted report. The retained report also reveals concrete data-quality limitations, and its appendix records **three executed stages rather than a verified complete four-stage run**.
+
+**[Read the real-run case study →](case-studies/semiconductor-2026-07.md)** · The interactive public demo is a **separate, synthetic** walkthrough.
+
 ## What the project does
 
 ```text
@@ -127,6 +133,8 @@ Contributions and reproducible bug reports are welcome: [Contributing](CONTRIBUT
 ## 中文简介
 
 AI Research Agent 是一个面向投资研究的开源 AI Agent，整合金融数据采集、行业分析、公司比较与投资研判，形成完整的研究工作流，并生成可供审阅的研究报告。
+
+**真实运行案例**：项目曾在 2026 年 7 月运行 A 股半导体研究并生成报告；历史报告记录了数据采集及两个分析阶段，也暴露了需要核验的数据问题。[查看案例分析](case-studies/semiconductor-2026-07.md)。公开 Demo 则使用合成数据。
 
 ### 研究工作流
 
